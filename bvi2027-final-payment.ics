@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//BVI 2027//Ship's Log//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:bvi2027-final-payment@austinfitzpatrick.github.io
+DTSTAMP:20260801T160000Z
+DTSTART;VALUE=DATE:20270304
+DTEND;VALUE=DATE:20270305
+SUMMARY:BVI charter: final payment due
+DESCRIPTION:Final 50% payment ($24\,500) due to Carefree Yacht Charters — Austin collects shares from the group now.
+END:VEVENT
+END:VCALENDAR
