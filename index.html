@@ -218,7 +218,7 @@
   .seal {
     position: absolute;
     top: 12px; right: 14px;
-    width: 46px; height: 46px;
+    width: 54px; height: 54px;
     transform: rotate(-12deg);
     color: var(--brass);
     opacity: 0.85;
@@ -869,18 +869,26 @@
 
   // render the manifest from GUESTS
   const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  const SEAL = `
-    <svg class="seal" viewBox="0 0 48 48" aria-label="all squared away" role="img">
-      <circle cx="24" cy="24" r="21.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2.2"/>
-      <circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="1"/>
-      <circle cx="24" cy="15.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
-      <line x1="24" y1="18.1" x2="24" y2="33" stroke="currentColor" stroke-width="1.6"/>
-      <line x1="19" y1="22.5" x2="29" y2="22.5" stroke="currentColor" stroke-width="1.6"/>
-      <path d="M15.5 27.5 C16.5 32.5 20 35 24 35 C28 35 31.5 32.5 32.5 27.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
-      <path d="M15.5 27.5 l-2 -1.2 M15.5 27.5 l2.3 -0.4" stroke="currentColor" stroke-width="1.3"/>
-      <path d="M32.5 27.5 l2 -1.2 M32.5 27.5 l-2.3 -0.4" stroke="currentColor" stroke-width="1.3"/>
+  const SEAL = gi => `
+    <svg class="seal" viewBox="0 0 48 48" aria-label="all items done" role="img">
+      <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 2.2"/>
+      <circle cx="24" cy="24" r="13.8" fill="none" stroke="currentColor" stroke-width="1"/>
+      <path id="sealarc-${gi}" d="M7.5 24 A16.5 16.5 0 0 1 40.5 24" fill="none"/>
+      <text font-size="4.6" font-weight="600" letter-spacing="0.9" fill="currentColor" font-family="-apple-system, BlinkMacSystemFont, sans-serif">
+        <textPath href="#sealarc-${gi}" startOffset="50%" text-anchor="middle">ALL ITEMS DONE</textPath>
+      </text>
+      <circle cx="7.5" cy="24" r="0.9" fill="currentColor"/>
+      <circle cx="40.5" cy="24" r="0.9" fill="currentColor"/>
+      <g transform="translate(24 25) scale(0.78) translate(-24 -24)">
+        <circle cx="24" cy="15.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <line x1="24" y1="18.1" x2="24" y2="33" stroke="currentColor" stroke-width="1.6"/>
+        <line x1="19" y1="22.5" x2="29" y2="22.5" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M15.5 27.5 C16.5 32.5 20 35 24 35 C28 35 31.5 32.5 32.5 27.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M15.5 27.5 l-2 -1.2 M15.5 27.5 l2.3 -0.4" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M32.5 27.5 l2 -1.2 M32.5 27.5 l-2.3 -0.4" stroke="currentColor" stroke-width="1.3"/>
+      </g>
     </svg>`;
-  document.getElementById("guests").innerHTML = GUESTS.map(g => {
+  document.getElementById("guests").innerHTML = GUESTS.map((g, gi) => {
     const allDone = Object.values(g.tasks).every(st => st === "done" || st === "na");
     const tasks = Object.entries(g.tasks).map(([key, status]) => `
       <div class="gtask ${status === "na" ? "na" : status === "done" ? "done" : status === "warn" ? "warn" : ""}">
@@ -899,7 +907,7 @@
       : drow("Flight", g.flight, "add flight details when booked");
     return `
     <article class="guest">
-      ${allDone ? SEAL : ""}
+      ${allDone ? SEAL(gi) : ""}
       <div class="gname">${esc(g.name)}</div>
       ${tasks}
       <div class="gdetails">
