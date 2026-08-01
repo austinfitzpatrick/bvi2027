@@ -248,6 +248,8 @@
     margin-right: 8px;
   }
   .guest .gdetails .dval { color: var(--cream); }
+  .guest .gdetails .drow.fleg { font-size: 11.5px; white-space: nowrap; }
+  .guest .gdetails .drow.fleg .dlabel { min-width: 34px; }
   .guest .gdetails .dval.empty {
     color: var(--cream-dim);
     font-style: italic;
@@ -867,7 +869,7 @@
     const track = n => `<a href="https://www.flightaware.com/live/flight/${n.replace(/\s/g, "").replace("AA", "AAL")}">${n}</a>`;
     const flightRows = Array.isArray(g.flight)
       ? g.flight.map(l => `
-      <div class="drow"><span class="dlabel">${l.dir}</span><span class="dval">${l.nums.map(track).join(" + ")} · ${l.route}</span></div>`).join("")
+      <div class="drow fleg"><span class="dlabel">${l.dir}</span><span class="dval">${l.nums.map(track).join(" + ")} · ${l.route}</span></div>`).join("")
       : drow("Flight", g.flight, "add flight details when booked");
     return `
     <article class="guest">
