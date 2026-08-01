@@ -188,6 +188,8 @@
   .tick.prog { border-color: var(--brass-dim); }
   .tick.prog::before { content: "~"; }
   .gtask .gsub { display: block; font-size: 11.5px; color: var(--cream-dim); margin-top: 1px; }
+  .gtask.warn .lbl { color: #e8c845; }
+  .tick.warn { border-color: #e8c845; }
   .actions .item.done .txt { color: var(--cream-dim); text-decoration: line-through; text-decoration-color: var(--brass-dim); }
   .actions .due {
     display: block;
@@ -758,61 +760,51 @@
   const GUESTS = [
     {
       name: "Austin Fitzpatrick",
-      email: "fitzpatrick.austin@gmail.com",
       tasks: { in: "done", email: "done", passport: "done", flights: "todo", scuba: "done" },
       flight: ""
     },
     {
       name: "Linda Fitzpatrick",
-      email: "charmingtoad@gmail.com",
       tasks: { in: "done", email: "done", passport: "done", flights: "todo" },
       flight: ""
     },
     {
       name: "Dan Ellis",
-      email: "yabomonkey@gmail.com",
       tasks: { in: "done", email: "done", passport: "todo", flights: "todo", scuba: "unknown" , childcare: "todo" },
       flight: ""
     },
     {
       name: "Lizzy Ellis",
-      email: "etusuzyan@gmail.com",
       tasks: { in: "done", email: "done", passport: "todo", flights: "todo" , childcare: "todo" },
       flight: ""
     },
     {
       name: "Eric Delgado",
-      email: "delgado.eric87@gmail.com",
       tasks: { in: "done", email: "done", passport: "done", flights: "todo", scuba: "prog" },
       flight: ""
     },
     {
       name: "Kris Trueblood",
-      email: "ketrueblood@gmail.com",
       tasks: { in: "done", email: "done", passport: "todo", flights: "todo", scuba: "unknown" },
       flight: ""
     },
     {
       name: "Chad Moseley",
-      email: "chad.moseley@gmail.com",
-      tasks: { in: "done", email: "done", passport: "todo", flights: "todo", scuba: "unknown" , childcare: "todo" },
+      tasks: { in: "done", email: "done", passportfix: "warn", flights: "todo", scuba: "unknown" , childcare: "todo" },
       flight: ""
     },
     {
       name: "Kelly Moseley",
-      email: "ringsofreedom@gmail.com",
       tasks: { in: "done", email: "done", passport: "todo", flights: "todo", scuba: "unknown" , childcare: "todo" },
       flight: ""
     },
     {
       name: "Taylor Washington",
-      email: "taylorewashington@gmail.com",
       tasks: { in: "done", email: "done", passport: "todo", flights: "todo", scuba: "done" },
       flight: ""
     },
     {
       name: "Anastasia Antonova",
-      email: "",
       tasks: { in: "done", passport: "todo", flights: "todo", scuba: "unknown" },
       flight: ""
     }
@@ -822,6 +814,7 @@
     in: "Confirmed in",
     email: "Email given to Lynne for the group list",
     passport: "Passport valid for April 2027",
+    passportfix: "Update passport",
     flights: "Flights booked",
     scuba: "Scuba: PADI certified",
     childcare: "Childcare lined up for the week"
@@ -857,8 +850,8 @@
   const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   document.getElementById("guests").innerHTML = GUESTS.map(g => {
     const tasks = Object.entries(g.tasks).map(([key, status]) => `
-      <div class="gtask ${status === "na" ? "na" : status === "done" ? "done" : ""}">
-        <span class="tick ${status === "done" ? "done" : status === "na" ? "na" : status === "prog" ? "prog" : ""}"></span>
+      <div class="gtask ${status === "na" ? "na" : status === "done" ? "done" : status === "warn" ? "warn" : ""}">
+        <span class="tick ${status === "done" ? "done" : status === "na" ? "na" : status === "prog" ? "prog" : status === "warn" ? "warn" : ""}"></span>
         <span class="lbl">${TASK_LABELS[key] || key}${status === "unknown" ? "?" : ""}${status === "prog" ? '<span class="gsub">in progress</span>' : status === "unknown" ? '<span class="gsub">planning on getting certified?</span>' : ""}</span>
       </div>`).join("");
     const drow = (label, val, placeholder) => `
@@ -870,7 +863,6 @@
       <div class="gname">${esc(g.name)}</div>
       ${tasks}
       <div class="gdetails">
-        ${g.email ? drow("Email", g.email, "") : ""}
         ${drow("Flight", g.flight, "add flight details when booked")}
       </div>
     </article>`;
