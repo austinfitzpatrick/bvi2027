@@ -761,12 +761,18 @@
     {
       name: "Austin Fitzpatrick",
       tasks: { in: "done", email: "done", passport: "done", flights: "done", scuba: "done" },
-      flight: "Out AA 842 + 4323 · LAX 10:59 PM Apr 16 → EIS 11:22 AM · Back AA 4313 + 1485 · EIS 4:54 PM Apr 25 → LAX 12:42 AM"
+      flight: [
+        { dir: "Out", nums: ["AA 842", "AA 4323"], route: "Apr 16 · LAX 10:59 PM → EIS 11:22 AM" },
+        { dir: "Back", nums: ["AA 4313", "AA 1485"], route: "Apr 25 · EIS 4:54 PM → LAX 12:42 AM" }
+      ]
     },
     {
       name: "Linda Fitzpatrick",
       tasks: { in: "done", email: "done", passport: "done", flights: "done" },
-      flight: "Out AA 842 + 4323 · LAX 10:59 PM Apr 16 → EIS 11:22 AM · Back AA 4313 + 1485 · EIS 4:54 PM Apr 25 → LAX 12:42 AM"
+      flight: [
+        { dir: "Out", nums: ["AA 842", "AA 4323"], route: "Apr 16 · LAX 10:59 PM → EIS 11:22 AM" },
+        { dir: "Back", nums: ["AA 4313", "AA 1485"], route: "Apr 25 · EIS 4:54 PM → LAX 12:42 AM" }
+      ]
     },
     {
       name: "Dan Ellis",
@@ -858,12 +864,17 @@
       <div class="drow"><span class="dlabel">${label}</span>${
         val ? `<span class="dval">${esc(val)}</span>`
             : `<span class="dval empty">${placeholder}</span>`}</div>`;
+    const track = n => `<a href="https://www.flightaware.com/live/flight/${n.replace(/\s/g, "").replace("AA", "AAL")}">${n}</a>`;
+    const flightRows = Array.isArray(g.flight)
+      ? g.flight.map(l => `
+      <div class="drow"><span class="dlabel">${l.dir}</span><span class="dval">${l.nums.map(track).join(" + ")} · ${l.route}</span></div>`).join("")
+      : drow("Flight", g.flight, "add flight details when booked");
     return `
     <article class="guest">
       <div class="gname">${esc(g.name)}</div>
       ${tasks}
       <div class="gdetails">
-        ${drow("Flight", g.flight, "add flight details when booked")}
+        ${flightRows}
       </div>
     </article>`;
   }).join("");
