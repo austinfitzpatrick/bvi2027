@@ -835,7 +835,7 @@
     },
     {
       name: "Kris Trueblood",
-      tasks: { in: "done", email: "done", passport: "done", flights: "done", scuba: "unknown" },
+      tasks: { in: "done", email: "done", passport: "done", flights: "done" },
       flight: [
         { dir: "Out", nums: ["AA 842", "AA 4323"], route: "Apr 16 · LAX 10:59 PM → EIS 11:22 AM" },
         { dir: "Back", nums: ["AA 4313", "AA 1485"], route: "Apr 25 · EIS 4:54 PM → LAX 12:42 AM" }
@@ -920,7 +920,7 @@
       </text>
     </svg>`;
   document.getElementById("guests").innerHTML = GUESTS.map((g, gi) => {
-    const allDone = Object.values(g.tasks).every(st => st === "done" || st === "na");
+    const allDone = Object.values(g.tasks).every(st => st === "done" || st === "na" || st === "prog");
     const tasks = Object.entries(g.tasks).map(([key, status]) => `
       <div class="gtask ${status === "na" ? "na" : status === "done" ? "done" : status === "warn" ? "warn" : ""}">
         <span class="tick ${status === "done" ? "done" : status === "na" ? "na" : status === "prog" ? "prog" : status === "warn" ? "warn" : ""}"></span>
