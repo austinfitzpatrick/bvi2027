@@ -316,6 +316,7 @@
     white-space: nowrap;
   }
   .paystatus.next { border-color: var(--brass-dim); color: var(--brass); }
+  .paystatus.paid { border-color: var(--brass-dim); color: var(--brass); background: rgba(201, 164, 92, 0.10); }
 
   /* ---------- boat card ---------- */
   .boat {
@@ -476,7 +477,7 @@
     <div class="datesline">
       <strong><em>Do More</em></strong> &nbsp;·&nbsp; <strong>April 18 – 25, 2027</strong> &nbsp;·&nbsp; 7 nights &nbsp;·&nbsp; Nanny Cay Marina, Tortola
     </div>
-    <div><span class="statuspill" id="statusPill">Hold in place · booking in progress</span></div>
+    <div><span class="statuspill" id="statusPill">Booked · deposit paid · charter confirmed</span></div>
     <p class="countdown"><strong id="days">—</strong> days until we board</p>
   </div>
 </header>
@@ -521,11 +522,23 @@
         <p class="what"><strong>Contract &amp; details email received.</strong></p>
         <p class="detail">Completed CYBA contract, payment details, and everything needed to book — in hand.</p>
       </li>
+      <li class="done">
+        <span class="dot">✓</span>
+        <div class="when">Aug 3, 2026</div>
+        <p class="what"><strong>Contract DocuSigned.</strong></p>
+        <p class="detail">Signed and returned via DocuSign that evening; Lynne confirmed receipt the next morning.</p>
+      </li>
+      <li class="done">
+        <span class="dot">✓</span>
+        <div class="when">Aug 4, 2026</div>
+        <p class="what"><strong>25% deposit paid — $12,250. The boat is ours.</strong></p>
+        <p class="detail">Paid by card the morning of Aug 4. With the signed contract and deposit both in Lynne's hands, the hold converts to a confirmed booking — no more challenge risk.</p>
+      </li>
       <li class="now">
         <span class="dot">◈</span>
-        <div class="when">Now · signing Aug 4</div>
-        <p class="what"><strong>Sign the contract + pay the 25% deposit — $12,250.</strong></p>
-        <p class="detail">DocuSign it and pay the deposit — that makes the boat ours.</p>
+        <div class="when">Now</div>
+        <p class="what"><strong>Sort out trip insurance.</strong></p>
+        <p class="detail">Charter payments are non-refundable, and Cancel For Any Reason coverage often must be purchased within a short window after the first deposit — so this is the time to decide. Details and recommended sources are in the portal.</p>
       </li>
       <li class="todo">
         <span class="dot"></span>
@@ -539,13 +552,13 @@
         <p class="what">Final 50% payment — $24,500</p>
         <p class="detail">Due 45 days before charter start.</p>
         <p class="detail" style="color:#e8c845">This is when I'll be collecting from you, friends.</p>
-        <p class="detail">📅 <a href="bvi2027-final-payment.ics">Add to calendar</a></p>
+        <p class="detail">📅 <a href="calendar/bvi2027-final-payment.ics">Add to calendar</a></p>
       </li>
       <li class="todo">
         <span class="dot">⚓</span>
         <div class="when">Apr 18, 2027</div>
         <p class="what">Board at Nanny Cay Marina, Tortola. Noon.</p>
-        <p class="detail">📅 <a href="bvi2027-charter-week.ics">Add the week to your calendar</a> · Apr 18–25</p>
+        <p class="detail">📅 <a href="calendar/bvi2027-charter-week.ics">Add the week to your calendar</a> · Apr 18–25</p>
       </li>
     </ol>
   </div>
@@ -587,20 +600,20 @@
           <span class="why">Nanny Cay Resort &amp; Marina, Sat Apr 17 → Sun Apr 18: five rooms, 2 per room — 3 Deluxe Queen ($342) and 2 Superior Queen ($390), weekend rates. Reserved and deposit paid via their payment link Jul 29. Changes possible if the room's available; free cancellation until 7 days before arrival. Reservations: +1-284-394-2512.</span>
         </div>
       </div>
-      <div class="item">
-        <span class="tick"></span>
+      <div class="item done">
+        <span class="tick done"></span>
         <div class="txt">
-          <span class="due hot">Tomorrow · Aug 4</span>
+          <span class="due">Done · Aug 4</span>
           DocuSign the contract and pay the 25% deposit ($12,250)
-          <span class="why">Contract &amp; details email arrived Aug 2. Hold expires Aug 6 and can be challenged until the contract and deposit are in. Card or wire both work.</span>
+          <span class="why">Signed via DocuSign Aug 3; deposit went on the card Aug 4, receipt in hand. Lynne's fine taking the second 25% on the card too (authorization form arrives via DocuSign before each charge) — the final 50% must be check, wire, or Wells Fargo deposit.</span>
         </div>
       </div>
       <div class="item">
         <span class="tick"></span>
         <div class="txt">
-          <span class="due">After signing</span>
+          <span class="due hot">Now</span>
           Decide on trip insurance (Cancel For Any Reason upgrade)
-          <span class="why">Charter payments are non-refundable once made. The contract explicitly recommends trip insurance + CFAR; details live in the portal.</span>
+          <span class="why">Charter payments are non-refundable once made, and CFAR policies often must be bought within a set window after the first deposit — that clock started Aug 4. Recommended sources live in the portal.</span>
         </div>
       </div>
     </div>
@@ -622,12 +635,12 @@
         <thead><tr><th>Payment</th><th>Due</th><th>Amount</th><th>Status</th></tr></thead>
         <tbody>
           <tr>
-            <td>Deposit · 25% on signing</td><td>~Aug 2026</td><td class="amt">$12,250</td>
-            <td><span class="paystatus next">Up next</span></td>
+            <td>Deposit · 25% on signing</td><td>Aug 4, 2026</td><td class="amt">$12,250</td>
+            <td><span class="paystatus paid">Paid</span></td>
           </tr>
           <tr>
             <td>Second deposit · 25%</td><td>~Oct 4, 2026</td><td class="amt">$12,250</td>
-            <td><span class="paystatus">Scheduled</span></td>
+            <td><span class="paystatus next">Up next</span></td>
           </tr>
           <tr>
             <td style="border-bottom:none">Final payment · 50%</td><td style="border-bottom:none">Mar 4, 2027</td><td class="amt" style="border-bottom:none">$24,500</td>
@@ -732,7 +745,7 @@
     <p class="finenote" style="margin-top:14px">If a different connection suits you, American runs four Miami→Tortola hops on our arrival day (Sat Apr 17): 8:30 AM → 11:22 AM (the suggested one), 10:10 AM → 1:07 PM, 1:23 PM → 4:14 PM, and 6:19 PM → 9:10 PM.</p>
     <p class="finenote" style="margin-top:14px">Leaves LA late Friday night, lands before noon Saturday — a half day of island to ourselves before we crash at the marina and step onto the boat the next morning. Fares will drift until booked. <a href="https://www.google.com/travel/flights/s/e45gFTkeArwsrQXa9">This exact itinerary on Google Flights →</a></p>
     <p class="finenote warnnote" style="margin-top:10px">⚠️ Don't sleep on booking: every Miami→Tortola island hop is a ~75-seat Embraer 175. Ten of us on one small plane means seats can genuinely sell out.</p>
-    <p class="finenote" style="margin-top:10px">Booking something different? Totally fine — the broker's <a href="Getting%20to%20the%20bvi%20-%20Carefree%20Yacht%20Charters.pdf">Getting to the BVI guide</a> covers the alternate routes (St. Thomas + ferry, San Juan + puddle-jumper). Just give Austin a heads-up so arrivals and the marina night stay coordinated.</p>
+    <p class="finenote" style="margin-top:10px">Booking something different? Totally fine — the broker's <a href="guides/getting-to-the-bvi.pdf">Getting to the BVI guide</a> covers the alternate routes (St. Thomas + ferry, San Juan + puddle-jumper). Just give Austin a heads-up so arrivals and the marina night stay coordinated.</p>
   </div>
 </section>
 
@@ -754,11 +767,13 @@
       <div class="card">
         <h3>The paper trail</h3>
         <ul class="doclist">
-          <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="CYBA%20Contract%20Draft%20for%20Client%20Review.pdf">CYBA contract draft</a></li>
-          <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="Lynne%20Emails.pdf">Lynne emails</a></li>
-          <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="Marina%20Hotel%20Emails.pdf">Marina hotel emails</a></li>
-          <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="Getting%20to%20the%20bvi%20-%20Carefree%20Yacht%20Charters.pdf">Getting to the BVI · from the portal</a></li>
-          <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="Hotel%20Suggestions%20-%20Carefree%20Yacht%20Charters.pdf">Hotel suggestions · from the portal</a></li>
+          <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="contracts/cyba-contract-draft.pdf">CYBA contract draft · blank</a></li>
+          <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="#" data-toast="⚓ The signed contract isn't posted publicly — reach out to Austin and he'll send you a copy!">Signed contract · ask Austin</a></li>
+          <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="emails/lynne-emails.pdf">Lynne emails</a></li>
+          <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="emails/contract-and-details-thread.pdf">Contract &amp; details email thread</a></li>
+          <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="emails/marina-hotel-emails.pdf">Marina hotel emails</a></li>
+          <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="guides/getting-to-the-bvi.pdf">Getting to the BVI · from the portal</a></li>
+          <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="guides/hotel-suggestions.pdf">Hotel suggestions · from the portal</a></li>
           <li><a href="https://austinfitzpatrick.github.io/bvi2027/pitch/">Original pitch site</a></li>
         </ul>
       </div>
@@ -947,14 +962,22 @@
     </article>`;
   }).join("");
 
-  // friendly nudge when someone tries to tick a box
+  // toast: friendly nudge when someone tries to tick a box, plus custom
+  // messages for links carrying a data-toast attribute
   const toast = document.getElementById("toast");
+  const toastDefault = toast.textContent;
   let toastTimer;
-  document.addEventListener("click", e => {
-    if (e.target.closest("a") || !e.target.closest(".gtask, .actions .tick")) return;
+  const showToast = msg => {
+    toast.textContent = msg;
     toast.classList.add("show");
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toast.classList.remove("show"), 4000);
+  };
+  document.addEventListener("click", e => {
+    const asker = e.target.closest("[data-toast]");
+    if (asker) { e.preventDefault(); showToast(asker.dataset.toast); return; }
+    if (e.target.closest("a") || !e.target.closest(".gtask, .actions .tick")) return;
+    showToast(toastDefault);
   });
 </script>
 </body>

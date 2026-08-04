@@ -1,6 +1,6 @@
-# Personal working files — not part of the published site (repo is public)
-Airfare for Austin and Linda.pdf
-IMG_8013.webp
+# Not published — the repo is public.
+# private/ holds signed documents, receipts, and personal files.
+private/
 site-archive/
 .claude/
 .DS_Store

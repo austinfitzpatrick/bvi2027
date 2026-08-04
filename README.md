@@ -8,8 +8,11 @@ Status site for our crewed BVI charter aboard **Do More** (62' Lagoon catamaran)
 
 - `index.html` — The Ship's Log: booking timeline, action items, guest manifest, cost breakdown, flight suggestions, and contacts. This is the whole site — no build step, no backend.
 - `pitch/` — the original boat-selection pitch site, kept for posterity.
-- `*.pdf` — the paper trail: contract draft, broker emails, hotel emails, and the broker's getting-there / hotel guides.
-- `*.ics` — calendar files linked from the site (charter week, final payment reminder).
+- `emails/` — the paper trail: broker email threads, marina hotel emails.
+- `guides/` — the broker's getting-there and hotel-suggestion PDFs.
+- `contracts/` — the blank CYBA contract draft. Signed documents are NOT here (see below).
+- `calendar/` — .ics files linked from the site (charter week, final payment reminder).
+- `private/` — gitignored, local only: signed contract, card authorization, receipts, personal travel documents. Never commit these; the site's "Signed contract" link deliberately shows a "ask Austin" toast instead.
 
 ## Updating the site
 
