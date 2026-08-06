@@ -103,6 +103,8 @@
     color: var(--brass);
     white-space: nowrap;
   }
+  .rule.sub { margin-top: 36px; }
+  .rule.sub h2 { font-size: 20px; }
   section > .wrap > p { max-width: 42em; margin-left: auto; margin-right: auto; }
   .finenote { font-size: 13px; color: var(--cream-dim); max-width: 46em; margin-left: auto; margin-right: auto; }
   .finenote.warnnote { color: #e8c845; }
@@ -624,6 +626,9 @@
   <div class="wrap">
     <div class="rule"><h2>The Manifest</h2></div>
     <div class="manifest" id="guests"></div>
+    <div class="rule sub"><h2>Cargo</h2></div>
+    <p class="finenote" style="text-align:center">Extras folks have offered to bring along. A check means it's packed and coming aboard.</p>
+    <div class="actions" id="cargo"></div>
   </div>
 </section>
 
@@ -879,6 +884,15 @@
     }
   ];
 
+  /* Cargo — extras people have offered to bring.
+     status: "todo" (offered) or "done" (packed & coming aboard). */
+  const CARGO = [
+    { who: "Austin", item: "GoPro", status: "todo" },
+    { who: "Austin", item: "Camera drone", status: "todo" },
+    { who: "Linda", item: "Murder mystery game", status: "todo" },
+    { who: "Eric", item: "Cuban cigars", status: "todo" }
+  ];
+
   const TASK_LABELS = {
     in: "Confirmed in",
     email: "Email given to Lynne for the group list",
@@ -961,6 +975,13 @@
       </div>
     </article>`;
   }).join("");
+
+  // render the cargo list from CARGO
+  document.getElementById("cargo").innerHTML = CARGO.map(c => `
+    <div class="item ${c.status === "done" ? "done" : ""}">
+      <span class="tick ${c.status === "done" ? "done" : ""}"></span>
+      <div class="txt"><strong>${esc(c.item)}</strong><span class="why">${esc(c.who)} is bringing this</span></div>
+    </div>`).join("");
 
   // toast: friendly nudge when someone tries to tick a box, plus custom
   // messages for links carrying a data-toast attribute
