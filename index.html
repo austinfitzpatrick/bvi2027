@@ -202,6 +202,13 @@
     margin-bottom: 2px;
   }
   .actions .due.hot { color: var(--alert); }
+  .actions .cargowho {
+    font-family: Palatino, "Palatino Linotype", Georgia, serif;
+    font-size: 18px;
+    color: var(--cream);
+    padding: 16px 0 4px;
+    border-bottom: 1px solid var(--line);
+  }
   .actions .why { display: block; font-size: 13.5px; color: var(--cream-dim); margin-top: 2px; }
   .actions .why a { color: var(--seaglass); }
   /* ---------- manifest (per-attendee) ---------- */
@@ -976,12 +983,15 @@
     </article>`;
   }).join("");
 
-  // render the cargo list from CARGO
-  document.getElementById("cargo").innerHTML = CARGO.map(c => `
+  // render the cargo list from CARGO, grouped under a header per person
+  const cargoByWho = CARGO.reduce((m, c) => ((m[c.who] ??= []).push(c), m), {});
+  document.getElementById("cargo").innerHTML = Object.entries(cargoByWho).map(([who, items]) => `
+    <div class="cargowho">${esc(who)}</div>
+    ${items.map(c => `
     <div class="item ${c.status === "done" ? "done" : ""}">
       <span class="tick ${c.status === "done" ? "done" : ""}"></span>
-      <div class="txt"><strong>${esc(c.item)}</strong><span class="why">${esc(c.who)} is bringing this</span></div>
-    </div>`).join("");
+      <div class="txt"><strong>${esc(c.item)}</strong></div>
+    </div>`).join("")}`).join("");
 
   // toast: friendly nudge when someone tries to tick a box, plus custom
   // messages for links carrying a data-toast attribute
