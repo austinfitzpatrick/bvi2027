@@ -448,6 +448,12 @@
   }
   .card h3 { margin: 0 0 8px; font-size: 18px; color: var(--cream); }
   .card p { margin: 4px 0; color: var(--cream-dim); }
+  .card.wide { grid-column: 1 / -1; }
+  .card.wide .doclist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    column-gap: 28px;
+  }
   .doclist { list-style: none; margin: 0; padding: 0; }
   .doclist li { display: flex; align-items: center; gap: 8px; margin: 7px 0; color: var(--cream-dim); }
   .pdficon { width: 12px; height: 14px; flex: none; color: var(--brass-dim); }
@@ -796,7 +802,7 @@
         <p>Captain Adrian · Chef Emma · Georgina, dive instructor</p>
         <p>They'll reach out directly about two weeks before boarding — itinerary thoughts, last questions, emergency contacts for the yacht. Until then, Lynne is our liaison.</p>
       </div>
-      <div class="card">
+      <div class="card wide">
         <h3>The paper trail</h3>
         <ul class="doclist">
           <li><svg class="pdficon" viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1 h6 l4 4 v8 h-10 z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M7 1 v4 h4" fill="none" stroke="currentColor" stroke-width="1"/></svg><a href="#" data-toast="⚓ The fully executed contract isn't posted publicly — reach out to Austin and he'll send you a copy!">Fully executed contract · ask Austin</a></li>
