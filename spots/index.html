@@ -16,6 +16,8 @@
     --cream-dim: #a99f8c;
     --seaglass: #7fa8a0;
     --moon: #e8c845;
+    --alert: #d98a76;
+    --alert-dim: #a05a4a;
     color-scheme: dark;
   }
   html { background: var(--ink); }
@@ -102,6 +104,7 @@
   }
   .tag.gold { border-color: var(--brass-dim); color: var(--brass); }
   .tag.moon { border-color: var(--moon); color: var(--moon); }
+  .tag.busy { border-color: var(--alert-dim); color: var(--alert); }
 
   /* featured full-moon card */
   .spot.featured { grid-column: 1 / -1; flex-direction: row; border-color: var(--brass-dim); }
@@ -153,7 +156,7 @@
       <article class="spot featured">
         <img src="img/fireballs.jpg" alt="One of Aragorn's steel fireball sculptures standing in the water at Trellis Bay, sailboats anchored behind">
         <div class="body">
-          <div class="tags"><span class="tag moon">Full moon · Tue Apr 20</span><span class="tag">Party</span><span class="tag">Dinghy ride</span></div>
+          <div class="tags"><span class="tag moon">Full moon · Tue Apr 20</span><span class="tag busy">Everybody comes</span><span class="tag">Dinghy ride</span></div>
           <h3>Trellis Bay Full Moon Party</h3>
           <p>The full moon lands on <strong>Tuesday, April 20 — right in the middle of our week</strong>. Trellis Bay on Beef Island throws the BVI's most famous full-moon bash: Aragorn's giant steel fireball sculptures burning out in the water, Moko Jumbie stilt dancers, live calypso, and barbecue along the beach. We anchor in the bay and dinghy in; the party comes to the boat for free. (Foxy's on Jost Van Dyke throws its own mellower full-moon party the same night — bonfires and live music — if we'd rather be anchored there.)</p>
         </div>
@@ -164,13 +167,13 @@
 
 <section>
   <div class="wrap">
-    <div class="rule"><h2>Only Because We Have the Boat</h2></div>
-    <p class="sectionnote">The stuff day-trippers and resort guests mostly can't reach — the reason to charter in the first place.</p>
+    <div class="rule"><h2>The Spots</h2></div>
+    <p class="sectionnote">The tags say who you'll be sharing each spot with — <span style="color:var(--brass)">boaters only</span>, mostly boaters, or <span style="color:var(--alert)">the tourist crowds</span>.</p>
     <div class="grid">
       <article class="spot">
         <img src="img/anegada.jpg" alt="Empty white sand beach and reef at Loblolly Bay, Anegada">
         <div class="body">
-          <div class="tags"><span class="tag gold">Boat-only</span><span class="tag">Full day</span><span class="tag">Snorkel</span></div>
+          <div class="tags"><span class="tag">Mostly boaters</span><span class="tag">Full day</span><span class="tag">Snorkel</span></div>
           <h3>Anegada</h3>
           <p>A low coral atoll ~15 miles out that most charters never reach. The standard BVI week sails about 75 nautical miles; adding the Anegada run stretches it to ~115 — worth every one. Miles of empty sand, flamingos in the salt ponds, and snorkeling on Horseshoe Reef. The one big itinerary decision: it eats a full day and wants a calm forecast.</p>
         </div>
@@ -178,7 +181,7 @@
       <article class="spot">
         <img src="img/cowwreck.jpg" alt="Palms and conch-shell wall at Cow Wreck Beach bar, Anegada">
         <div class="body">
-          <div class="tags"><span class="tag gold">Boat-only</span><span class="tag">Lobster</span><span class="tag">Beach bar</span></div>
+          <div class="tags"><span class="tag">Boaters by dinnertime</span><span class="tag">Lobster</span><span class="tag">Beach bar</span></div>
           <h3>Anegada Lobster on the Beach</h3>
           <p>The island's famous move: radio ahead in the morning, and by sunset there's <strong>Anegada lobster on the grill</strong> at a beach shack like Cow Wreck Beach or the settlement restaurants — toes in the sand, caught that day. Widely rated the best meal of a BVI week.</p>
         </div>
@@ -186,7 +189,7 @@
       <article class="spot">
         <img src="img/norman-caves.jpg" alt="A Lagoon catamaran moored at the cliffs of Treasure Point, Norman Island">
         <div class="body">
-          <div class="tags"><span class="tag gold">Mooring-only</span><span class="tag">Snorkel</span><span class="tag">Floating bar</span></div>
+          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Snorkel</span><span class="tag">Floating bar</span></div>
           <h3>Norman Island — Caves, Indians &amp; Willy T</h3>
           <p>The island behind <em>Treasure Island</em>. Snorkel the bat caves at Treasure Point and <strong>The Indians</strong> — four coral pinnacles you moor beside, some of the best snorkeling in the BVI. Then dinghy to the <strong>Willy T</strong>, the infamous floating bar anchored in the Bight: jump off the top deck, get the sticker.</p>
         </div>
@@ -194,7 +197,7 @@
       <article class="spot">
         <img src="img/rhone.jpg" alt="Coral-encrusted wreckage of the RMS Rhone underwater">
         <div class="body">
-          <div class="tags"><span class="tag gold">Dive</span><span class="tag">Snorkelable</span><span class="tag">Georgina's domain</span></div>
+          <div class="tags"><span class="tag">Boaters &amp; dive boats</span><span class="tag">Snorkelable</span><span class="tag">Georgina's domain</span></div>
           <h3>Wreck of the RMS Rhone</h3>
           <p>An 1867 royal mail steamer off Salt Island — the Caribbean's most celebrated wreck dive, and we're carrying our own PADI instructor and <strong>three free dives each for certified divers</strong>. Austin, Taylor, and (by then) Eric, this is the one. The shallow stern section works for snorkelers too. Note: no diving on the first or last day, per the contract.</p>
         </div>
@@ -202,7 +205,7 @@
       <article class="spot">
         <img src="img/sandyspit.jpg" alt="Aerial view of Sandy Spit, a tiny sand islet ringed by reef">
         <div class="body">
-          <div class="tags"><span class="tag gold">Boat-only</span><span class="tag">Swim ashore</span></div>
+          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Swim ashore</span></div>
           <h3>Sandy Spit &amp; Sandy Cay</h3>
           <p>The screensaver islets off Jost Van Dyke — a blob of white sand, a handful of palms, reef all around. No dock, no ferry, no bar: you anchor off and wade in. Bring the drone; this is what it's for.</p>
         </div>
@@ -210,24 +213,15 @@
       <article class="spot">
         <img src="img/baths-cave.jpg" alt="Giant granite boulders meeting the sea at The Baths, Virgin Gorda">
         <div class="body">
-          <div class="tags"><span class="tag gold">Beat the crowds</span><span class="tag">Swim in</span></div>
+          <div class="tags"><span class="tag busy">Tourist magnet</span><span class="tag">Go at 8 AM</span><span class="tag">Swim in</span></div>
           <h3>The Baths, Before Anyone Else</h3>
           <p>Virgin Gorda's giant granite boulders, grottos, and tidal pools — the single most famous sight in the BVI, mobbed by land tours from mid-morning. The charter move: moor off at 8 AM and <strong>swim into the grottos before the first taxi arrives</strong>. Nearby Fallen Jerusalem has the same boulders and nobody on them.</p>
         </div>
       </article>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="rule"><h2>The Classic Stops</h2></div>
-    <p class="sectionnote">Reachable by others, perfected by boat — the anchorages that make the BVI the BVI.</p>
-    <div class="grid">
       <article class="spot">
         <img src="img/whitebay.jpg" alt="Catamarans anchored in the turquoise water of White Bay, Jost Van Dyke">
         <div class="body">
-          <div class="tags"><span class="tag">Beach day</span><span class="tag">Anchor &amp; swim</span></div>
+          <div class="tags"><span class="tag busy">Busy by noon</span><span class="tag">Beach day</span><span class="tag">Anchor &amp; swim</span></div>
           <h3>White Bay, Jost Van Dyke</h3>
           <p>The BVI's most photographed beach — a strip of blinding sand behind a reef cut, lined with a dozen barefoot bars. Anchor inside the reef, swim ashore, wander bar to bar. Foxy's at Great Harbour and the <strong>Bubbly Pool</strong> (a natural wave-fed jacuzzi in the rocks) are on the same island.</p>
         </div>
@@ -235,7 +229,7 @@
       <article class="spot">
         <img src="img/soggy.jpg" alt="The Soggy Dollar Bar beach shack with rum barrels and teal chairs">
         <div class="body">
-          <div class="tags"><span class="tag">Beach bar</span><span class="tag">Painkiller № 1</span></div>
+          <div class="tags"><span class="tag busy">Tourist magnet</span><span class="tag">Painkiller № 1</span></div>
           <h3>Soggy Dollar Bar</h3>
           <p>Birthplace of the <strong>Painkiller</strong> — rum, coconut, pineapple, orange, fresh nutmeg. Named for how you pay: there's no dock, so you swim in and hand over wet bills. On White Bay, so it pairs with the beach day. Obligatory.</p>
         </div>
@@ -243,14 +237,14 @@
       <article class="spot">
         <img src="img/sabarock.jpg" alt="Saba Rock resort and bar on its tiny island in North Sound">
         <div class="body">
-          <div class="tags"><span class="tag">Evening anchorage</span><span class="tag">Sunset bar</span></div>
+          <div class="tags"><span class="tag">Mostly boaters</span><span class="tag">Evening anchorage</span><span class="tag">Sunset bar</span></div>
           <h3>North Sound &amp; Saba Rock</h3>
           <p>Virgin Gorda's protected inner lagoon — flat water, ringed by Prickly Pear, Eustatia, and Moskito islands. <strong>Saba Rock</strong> is a bar-restaurant on its own one-acre rock (dinghy dock, tarpon feeding at dusk), with the rebuilt Bitter End Yacht Club across the water. A natural overnight stop, and prime e-foil water.</p>
         </div>
       </article>
       <article class="spot">
         <div class="body">
-          <div class="tags"><span class="tag">Mooring-only resort</span><span class="tag">Turtles</span><span class="tag">Rum</span></div>
+          <div class="tags"><span class="tag">Mostly boaters</span><span class="tag">Turtles</span><span class="tag">Rum</span></div>
           <h3>Cooper Island Beach Club</h3>
           <p>A solar-powered eco-resort on Manchioneel Bay you can only reach by boat. <strong>Sea turtles graze under the moorings</strong>, the microbrewery makes its own beer, and the rum bar stocks one of the Caribbean's largest collections — 280-odd bottles. The obvious venue for Eric's cigars. A favorite last-night stop before the sail home.</p>
         </div>
