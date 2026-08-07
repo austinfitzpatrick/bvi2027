@@ -68,9 +68,11 @@
 
   /* ---------- sections ---------- */
   section { padding: 36px 0 8px; }
+  section.isle { padding: 26px 0 8px; }
   .rule { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
   .rule::before, .rule::after { content: ""; flex: 1; height: 1px; background: var(--line); }
   .rule h2 { margin: 0; font-size: 26px; color: var(--brass); white-space: nowrap; }
+  .rule.isle h2 { font-size: 21px; }
   .sectionnote { text-align: center; font-size: 13.5px; color: var(--cream-dim); max-width: 46em; margin: 0 auto 22px; }
 
   /* ---------- spot cards ---------- */
@@ -106,17 +108,6 @@
   .tag.moon { border-color: var(--moon); color: var(--moon); }
   .tag.busy { border-color: var(--alert-dim); color: var(--alert); }
 
-  /* featured full-moon card */
-  .spot.featured { grid-column: 1 / -1; flex-direction: row; border-color: var(--brass-dim); }
-  .spot.featured img { width: 46%; aspect-ratio: auto; border-bottom: none; border-right: 1px solid var(--line); }
-  .spot.featured .body { justify-content: center; padding: 22px 26px; }
-  .spot.featured h3 { font-size: 25px; }
-  .spot.featured p { font-size: 14.5px; }
-  @media (max-width: 640px) {
-    .spot.featured { flex-direction: column; }
-    .spot.featured img { width: 100%; aspect-ratio: 3 / 2; border-right: none; border-bottom: 1px solid var(--line); }
-  }
-
   /* ---------- footer ---------- */
   .sendnote {
     margin: 40px auto 0;
@@ -147,7 +138,7 @@
   </div>
 </header>
 
-<p class="standfirst">The itinerary gets decided <strong>with Captain Adrian on Day&nbsp;1</strong>, around the weather and what the group wants — so nothing here is a schedule. It's a menu. Read through, pick your <strong>must&nbsp;/ want&nbsp;/ skip</strong>, and bring it up with the group.</p>
+<p class="standfirst">The itinerary gets decided <strong>with Captain Adrian on Day&nbsp;1</strong>, around the weather and what the group wants — so nothing here is a schedule. It's a menu, organized by anchorage: pick an island and there's usually a day's worth to do around it. The tags say who you'll be sharing each spot with — <span style="color:var(--brass)">boaters only</span>, mostly boaters, or <span style="color:var(--alert)">the tourist crowds</span>. Read through, pick your <strong>must&nbsp;/ want&nbsp;/ skip</strong>, and bring it up with the group.</p>
 
 <section>
   <div class="wrap">
@@ -173,65 +164,162 @@
   </div>
 </section>
 
-<section>
+<section class="isle">
   <div class="wrap">
-    <div class="rule"><h2>The Spots</h2></div>
-    <p class="sectionnote">The tags say who you'll be sharing each spot with — <span style="color:var(--brass)">boaters only</span>, mostly boaters, or <span style="color:var(--alert)">the tourist crowds</span>.</p>
+    <div class="rule isle"><h2>Norman Island — The Bight</h2></div>
+    <p class="sectionnote">The classic first-night anchorage, a short sail from Nanny Cay — snorkeling, a floating bar, and real trails all in one stop.</p>
+    <div class="grid">
+      <article class="spot">
+        <img src="img/norman-caves.jpg" alt="A Lagoon catamaran moored at the cliffs of Treasure Point, Norman Island">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Snorkel</span></div>
+          <h3>The Caves &amp; The Indians</h3>
+          <p>The island behind <em>Treasure Island</em>. Snorkel straight into the bat caves at Treasure Point, then dinghy out to <strong>The Indians</strong> — four coral pinnacles rising from the channel, some of the best snorkeling in the BVI. Both are moorings-only stops minutes from the anchorage.</p>
+        </div>
+      </article>
+      <article class="spot">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Floating bar</span></div>
+          <h3>The Willy T</h3>
+          <p>The infamous <strong>floating bar</strong> anchored in the Bight — a converted ship you can only reach by dinghy. Jump off the top deck, earn the sticker, dinghy home. The hurricane-sunk original Willy T now lies off Peter Island as a dive site, which says something about the establishment.</p>
+        </div>
+      </article>
+      <article class="spot">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Hike</span></div>
+          <h3>Spyglass Hill &amp; the Trails</h3>
+          <p>Norman is private but keeps its <strong>~8 miles of trails</strong> open to visitors. From the Bight, the short option climbs to Spyglass Hill — the pirates' actual lookout over the whole Drake Channel — and the long option crosses the island to Money Bay. One for the hikers while the rest hold down the Willy T.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="isle">
+  <div class="wrap">
+    <div class="rule isle"><h2>Salt &amp; Cooper Islands</h2></div>
+    <p class="sectionnote">Two quiet neighbors on the south side of the Drake Channel — the BVI's best wreck and its best last-night anchorage.</p>
+    <div class="grid">
+      <article class="spot">
+        <img src="img/rhone.jpg" alt="Coral-encrusted wreckage of the RMS Rhone underwater">
+        <div class="body">
+          <div class="tags"><span class="tag">Boaters &amp; dive boats</span><span class="tag">Snorkelable</span><span class="tag">Scuba</span></div>
+          <h3>Wreck of the RMS Rhone</h3>
+          <p>An 1867 royal mail steamer off Salt Island — the Caribbean's most celebrated wreck dive, and we're carrying our own PADI instructor and <strong>three free dives each for certified divers</strong>. The shallow stern section works for snorkelers too. Ashore, a short walk passes the old salt ponds to the graves of the Rhone's sailors. Note: no diving on the first or last day, per the contract.</p>
+        </div>
+      </article>
+      <article class="spot">
+        <img src="img/cooper.jpg" alt="Catamarans moored off the palm-lined beach at Manchioneel Bay, Cooper Island">
+        <div class="body">
+          <div class="tags"><span class="tag">Mostly boaters</span><span class="tag">Turtles</span><span class="tag">Rum</span></div>
+          <h3>Cooper Island Beach Club</h3>
+          <p>A solar-powered eco-resort on Manchioneel Bay you can only reach by boat. <strong>Sea turtles graze under the moorings</strong> — kayak or SUP over them in the morning calm — the microbrewery makes its own beer, and the rum bar stocks one of the Caribbean's largest collections, 280-odd bottles. The obvious venue for Eric's cigars, and a favorite last-night stop before the sail home.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="isle">
+  <div class="wrap">
+    <div class="rule isle"><h2>The Dogs</h2></div>
+    <p class="sectionnote">Uninhabited islets halfway to Virgin Gorda — no bars, no beaches worth the name, just some of the BVI's best reefs. A natural lunch stop on a Baths or North Sound day.</p>
+    <div class="grid">
+      <article class="spot">
+        <div class="body">
+          <div class="tags"><span class="tag">Boaters &amp; dive boats</span><span class="tag">Scuba</span><span class="tag">Snorkel</span></div>
+          <h3>Diving The Dogs</h3>
+          <p>Three headline sites: <strong>The Chimney</strong> on Great Dog, a swim-up rock shaft ending in a fish-bowl cauldron of reef fish; <strong>Bronco Billy</strong> off George Dog, reputedly a Jacques Cousteau favorite; and <strong>Coral Gardens</strong>, where three small airplanes were sunk in 2019 as an artificial reef and are already coral-crusted. Day moorings only, calm-morning territory — another one to plan with Georgina, and good snorkeling for the non-divers when it's flat.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="isle">
+  <div class="wrap">
+    <div class="rule isle"><h2>Virgin Gorda — The Baths</h2></div>
+    <p class="sectionnote">The southern tip of Virgin Gorda, where the granite starts.</p>
+    <div class="grid">
+      <article class="spot">
+        <img src="img/baths-cave.jpg" alt="Giant granite boulders meeting the sea at The Baths, Virgin Gorda">
+        <div class="body">
+          <div class="tags"><span class="tag busy">Tourist magnet</span><span class="tag">Go at 8 AM</span><span class="tag">Swim in</span></div>
+          <h3>The Baths, Before Anyone Else</h3>
+          <p>Giant granite boulders, grottos, and tidal pools — the single most famous sight in the BVI, mobbed by land tours from mid-morning. The charter move: moor off at 8 AM and <strong>swim into the grottos before the first taxi arrives</strong>, then take the boulder-scramble trail through to Devil's Bay. Nearby Fallen Jerusalem has the same boulders and nobody on them.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="isle">
+  <div class="wrap">
+    <div class="rule isle"><h2>Virgin Gorda — North Sound</h2></div>
+    <p class="sectionnote">A huge reef-ringed lagoon at the island's north end — the BVI's flat-water playground and a natural overnight base.</p>
+    <div class="grid">
+      <article class="spot">
+        <img src="img/sabarock.jpg" alt="Saba Rock resort and bar on its tiny island in North Sound">
+        <div class="body">
+          <div class="tags"><span class="tag">Mostly boaters</span><span class="tag">Evening anchorage</span><span class="tag">Sunset bar</span></div>
+          <h3>Saba Rock</h3>
+          <p>A bar-restaurant on its own one-acre rock in the middle of the sound — dinghy dock, tarpon feeding at dusk, rebuilt beautifully after Irma — with the Bitter End Yacht Club across the water and Leverick Bay around the corner.</p>
+        </div>
+      </article>
+      <article class="spot">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Toys out</span></div>
+          <h3>The Flat Water</h3>
+          <p>This is where <em>Do More</em>'s garage earns its keep: protected, glassy morning water for the <strong>e-foil, sea scooters, SUPs, and kayaks</strong>, with adjacent Eustatia Sound serving as the local kite-and-foil playground. Anchor here a full evening-to-morning and everyone gets a turn on everything.</p>
+        </div>
+      </article>
+      <article class="spot">
+        <div class="body">
+          <div class="tags"><span class="tag">Hike</span><span class="tag">Taxi to trailhead</span></div>
+          <h3>Gorda Peak</h3>
+          <p>Virgin Gorda's summit — about <strong>50 minutes up through dry forest to a 360° platform at 1,370 ft</strong>, looking down on the whole North Sound (the photo at the top of this page is that view). Short taxi to the trailhead from Leverick Bay. The best effort-to-view ratio in the islands; one for the hikers on a North Sound morning.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="isle">
+  <div class="wrap">
+    <div class="rule isle"><h2>Anegada</h2></div>
+    <p class="sectionnote">The far-out one: ~2–3 hours of open-water sailing north from North Sound, and the reason our week logs ~115 miles instead of 75. Wants a calm forecast; worth the spend.</p>
     <div class="grid">
       <article class="spot">
         <img src="img/anegada.jpg" alt="Empty white sand beach and reef at Loblolly Bay, Anegada">
         <div class="body">
           <div class="tags"><span class="tag">Mostly boaters</span><span class="tag">Full day</span><span class="tag">Snorkel</span></div>
-          <h3>Anegada</h3>
-          <p>A low coral atoll ~15 miles out that most charters never reach. The standard BVI week sails about 75 nautical miles; adding the Anegada run stretches it to ~115 — worth every one. Miles of empty sand, flamingos in the salt ponds, and snorkeling on Horseshoe Reef. The one big itinerary decision: it eats a full day and wants a calm forecast.</p>
+          <h3>The Island Itself</h3>
+          <p>A low coral atoll most charters never reach — so flat you can't see it until you're nearly there. Miles of empty sand at Loblolly and Cow Wreck, flamingos in the salt ponds, snorkeling on Horseshoe Reef, and the flattest SUP water of the trip inside the anchorage.</p>
         </div>
       </article>
       <article class="spot">
         <img src="img/cowwreck.jpg" alt="Palms and conch-shell wall at Cow Wreck Beach bar, Anegada">
         <div class="body">
           <div class="tags"><span class="tag">Boaters by dinnertime</span><span class="tag">Lobster</span><span class="tag">Beach bar</span></div>
-          <h3>Anegada Lobster on the Beach</h3>
-          <p>The island's famous move: radio ahead in the morning, and by sunset there's <strong>Anegada lobster on the grill</strong> at a beach shack like Cow Wreck Beach or the settlement restaurants — toes in the sand, caught that day. Widely rated the best meal of a BVI week.</p>
+          <h3>Lobster on the Beach</h3>
+          <p>The island's famous move: radio ahead in the morning, and by sunset there's <strong>Anegada lobster on the grill</strong> at a beach shack — toes in the sand, caught that day. The day-trip ferry leaves at 5 PM, so the dinner crowd is almost entirely people who sailed in. Widely rated the best meal of a BVI week.</p>
         </div>
       </article>
-      <article class="spot">
-        <img src="img/norman-caves.jpg" alt="A Lagoon catamaran moored at the cliffs of Treasure Point, Norman Island">
-        <div class="body">
-          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Snorkel</span><span class="tag">Floating bar</span></div>
-          <h3>Norman Island — Caves, Indians &amp; Willy T</h3>
-          <p>The island behind <em>Treasure Island</em>. Snorkel the bat caves at Treasure Point and <strong>The Indians</strong> — four coral pinnacles you moor beside, some of the best snorkeling in the BVI. Then dinghy to the <strong>Willy T</strong>, the infamous floating bar anchored in the Bight: jump off the top deck, get the sticker.</p>
-        </div>
-      </article>
-      <article class="spot">
-        <img src="img/rhone.jpg" alt="Coral-encrusted wreckage of the RMS Rhone underwater">
-        <div class="body">
-          <div class="tags"><span class="tag">Boaters &amp; dive boats</span><span class="tag">Snorkelable</span><span class="tag">Scuba</span></div>
-          <h3>Wreck of the RMS Rhone</h3>
-          <p>An 1867 royal mail steamer off Salt Island — the Caribbean's most celebrated wreck dive, and we're carrying our own PADI instructor and <strong>three free dives each for certified divers</strong>. Austin, Taylor, and (by then) Eric, this is the one. The shallow stern section works for snorkelers too. Note: no diving on the first or last day, per the contract.</p>
-        </div>
-      </article>
-      <article class="spot">
-        <img src="img/sandyspit.jpg" alt="Aerial view of Sandy Spit, a tiny sand islet ringed by reef">
-        <div class="body">
-          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Swim ashore</span></div>
-          <h3>Sandy Spit &amp; Sandy Cay</h3>
-          <p>The screensaver islets off Jost Van Dyke — a blob of white sand, a handful of palms, reef all around. No dock, no ferry, no bar: you anchor off and wade in. Bring the drone; this is what it's for.</p>
-        </div>
-      </article>
-      <article class="spot">
-        <img src="img/baths-cave.jpg" alt="Giant granite boulders meeting the sea at The Baths, Virgin Gorda">
-        <div class="body">
-          <div class="tags"><span class="tag busy">Tourist magnet</span><span class="tag">Go at 8 AM</span><span class="tag">Swim in</span></div>
-          <h3>The Baths, Before Anyone Else</h3>
-          <p>Virgin Gorda's giant granite boulders, grottos, and tidal pools — the single most famous sight in the BVI, mobbed by land tours from mid-morning. The charter move: moor off at 8 AM and <strong>swim into the grottos before the first taxi arrives</strong>. Nearby Fallen Jerusalem has the same boulders and nobody on them.</p>
-        </div>
-      </article>
+    </div>
+  </div>
+</section>
+
+<section class="isle">
+  <div class="wrap">
+    <div class="rule isle"><h2>Jost Van Dyke &amp; Its Islets</h2></div>
+    <p class="sectionnote">The barefoot island — beach bars in front, the Bubbly Pool around the back, and postcard islets off the east end.</p>
+    <div class="grid">
       <article class="spot">
         <img src="img/whitebay.jpg" alt="Catamarans anchored in the turquoise water of White Bay, Jost Van Dyke">
         <div class="body">
           <div class="tags"><span class="tag busy">Busy by noon</span><span class="tag">Beach day</span><span class="tag">Anchor &amp; swim</span></div>
-          <h3>White Bay, Jost Van Dyke</h3>
-          <p>The BVI's most photographed beach — a strip of blinding sand behind a reef cut, lined with a dozen barefoot bars. Anchor inside the reef, swim ashore, wander bar to bar. Foxy's at Great Harbour and the <strong>Bubbly Pool</strong> (a natural wave-fed jacuzzi in the rocks) are on the same island.</p>
+          <h3>White Bay</h3>
+          <p>The BVI's most photographed beach — a strip of blinding sand behind a reef cut, lined with a dozen barefoot bars. Anchor inside the reef, swim ashore, wander bar to bar. Around the island's back side, the <strong>Bubbly Pool</strong> — a natural wave-fed jacuzzi in the rocks — makes a good walk from Foxy's Taboo.</p>
         </div>
       </article>
       <article class="spot">
@@ -243,19 +331,11 @@
         </div>
       </article>
       <article class="spot">
-        <img src="img/sabarock.jpg" alt="Saba Rock resort and bar on its tiny island in North Sound">
+        <img src="img/sandyspit.jpg" alt="Aerial view of Sandy Spit, a tiny sand islet ringed by reef">
         <div class="body">
-          <div class="tags"><span class="tag">Mostly boaters</span><span class="tag">Evening anchorage</span><span class="tag">Sunset bar</span></div>
-          <h3>North Sound &amp; Saba Rock</h3>
-          <p>Virgin Gorda's protected inner lagoon — flat water, ringed by Prickly Pear, Eustatia, and Moskito islands. <strong>Saba Rock</strong> is a bar-restaurant on its own one-acre rock (dinghy dock, tarpon feeding at dusk), with the rebuilt Bitter End Yacht Club across the water. A natural overnight stop, and prime e-foil water.</p>
-        </div>
-      </article>
-      <article class="spot">
-        <img src="img/cooper.jpg" alt="Catamarans moored off the palm-lined beach at Manchioneel Bay, Cooper Island">
-        <div class="body">
-          <div class="tags"><span class="tag">Mostly boaters</span><span class="tag">Turtles</span><span class="tag">Rum</span></div>
-          <h3>Cooper Island Beach Club</h3>
-          <p>A solar-powered eco-resort on Manchioneel Bay you can only reach by boat. <strong>Sea turtles graze under the moorings</strong>, the microbrewery makes its own beer, and the rum bar stocks one of the Caribbean's largest collections — 280-odd bottles. The obvious venue for Eric's cigars. A favorite last-night stop before the sail home.</p>
+          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Swim ashore</span></div>
+          <h3>Sandy Spit &amp; Sandy Cay</h3>
+          <p>The screensaver islets off the east end — a blob of white sand, a handful of palms, reef all around. No dock, no ferry, no bar: you anchor off and wade in. Bring the drone; this is what it's for.</p>
         </div>
       </article>
     </div>
@@ -274,13 +354,13 @@
       <circle cx="36" cy="36" r="2.5" fill="#a99f8c"/>
     </svg>
     <div class="flag2"><em>Do More</em> · April 18–25, 2027 · British Virgin Islands</div>
-    <p class="credits">Photos via Wikimedia Commons:
+    <p class="credits">Photos via Wikimedia Commons &amp; Flickr:
       <a href="https://commons.wikimedia.org/wiki/File:Virgin_Gorda_North_Sound_2010.jpg">North Sound</a> © Gruepig (CC BY-SA 4.0) ·
       <a href="https://www.flickr.com/photos/45319526@N07/4616790245">Trellis Bay fireball</a> © Madoka13 on Flickr (CC BY-NC-ND 2.0) ·
+      <a href="https://commons.wikimedia.org/wiki/File:Foxy%27s_bar,_Jost_Van_Dyke.jpg">Foxy's</a> © anoldent (CC BY-SA 2.0) ·
       <a href="https://www.flickr.com/photos/89333651@N00/13202719403">Cooper Island</a> © kmoliver on Flickr (CC BY-NC-ND 2.0) ·
       <a href="https://commons.wikimedia.org/wiki/File:Anegada_-_Loblolly_and_Salt_Ponds_-_09.jpg">Anegada</a> © ScubaBear68 (CC BY 2.0) ·
       <a href="https://commons.wikimedia.org/wiki/File:Cow_Wreck_Beach,_British_Virgin_Islands_Nov_2019.jpg">Cow Wreck Beach</a> © anoldent (CC BY-SA 2.0) ·
-      <a href="https://commons.wikimedia.org/wiki/File:Foxy%27s_bar,_Jost_Van_Dyke.jpg">Foxy's</a> © anoldent (CC BY-SA 2.0) ·
       <a href="https://commons.wikimedia.org/wiki/File:The_Caves_@_Treasure_Point_on_Norman_Island.jpg">Norman Island</a> © Matt &amp; Nayoung (CC BY 2.0) ·
       <a href="https://commons.wikimedia.org/wiki/File:RMS_Rhone_2003_12.jpg">RMS Rhone</a> © Gareth Richards (CC BY-SA 3.0) ·
       <a href="https://commons.wikimedia.org/wiki/File:Karibik_-_Brit._Jungferninseln_-_Sandy_Spit_-_panoramio.jpg">Sandy Spit</a> © giggel (CC BY 3.0) ·
