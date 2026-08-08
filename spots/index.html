@@ -66,6 +66,44 @@
   .standfirst { text-align: center; max-width: 44em; margin: 26px auto 0; color: var(--cream-dim); padding: 0 20px; }
   .standfirst strong { color: var(--cream); }
 
+  .ainote {
+    text-align: center; max-width: 40em; margin: 18px auto 0; padding: 8px 20px;
+    font-size: 13px; color: var(--cream-dim);
+    border: 1px solid var(--line); border-radius: 999px;
+    width: fit-content;
+  }
+  .ainote .spark { color: var(--brass); }
+
+  /* ---------- view bar ---------- */
+  .viewbar {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(13,27,38,0.92);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    margin-top: 26px;
+  }
+  .viewbar .wrap {
+    display: flex; align-items: center; gap: 8px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding-top: 10px; padding-bottom: 10px;
+  }
+  .viewbar .lbl {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--cream-dim); white-space: nowrap; margin-right: 4px;
+  }
+  .viewchip {
+    font: inherit; font-size: 13px; white-space: nowrap;
+    padding: 5px 14px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line); background: transparent; color: var(--cream);
+  }
+  .viewchip:hover { border-color: var(--brass-dim); }
+  .viewchip[aria-pressed="true"] {
+    background: var(--brass); border-color: var(--brass); color: var(--ink);
+    font-weight: 600;
+  }
+  .viewchip:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+  .viewhidden { display: none !important; }
+
   /* ---------- sections ---------- */
   section { padding: 36px 0 8px; }
   section.isle { padding: 26px 0 8px; }
@@ -110,6 +148,89 @@
   .tag.moon { border-color: var(--moon); color: var(--moon); }
   .tag.busy { border-color: var(--alert-dim); color: var(--alert); }
 
+  /* ---------- dive table ---------- */
+  .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  #divetable { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+  #divetable th {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+    color: var(--brass); text-align: left; white-space: nowrap;
+    padding: 10px 14px; border-bottom: 1px solid var(--brass-dim);
+    cursor: pointer; user-select: none; -webkit-user-select: none;
+  }
+  #divetable th:hover { color: var(--moon); }
+  #divetable th::after { content: "↕"; opacity: 0.35; margin-left: 6px; font-size: 10px; }
+  #divetable th[aria-sort="ascending"]::after { content: "↑"; opacity: 1; }
+  #divetable th[aria-sort="descending"]::after { content: "↓"; opacity: 1; }
+  #divetable td { padding: 11px 14px; border-bottom: 1px solid var(--line); color: var(--cream-dim); vertical-align: top; }
+  #divetable td.site { white-space: nowrap; }
+  #divetable td.site a {
+    font-family: Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    font-size: 16.5px; color: var(--cream); text-decoration: none;
+  }
+  #divetable td.site a:hover { color: var(--seaglass); }
+  #divetable td.num { white-space: nowrap; }
+  #divetable tbody tr:hover { background: var(--panel); }
+  #divetable .lv3 { color: var(--alert); }
+  #divetable .star { color: var(--moon); font-size: 12px; }
+  #divetable td.starcell { text-align: center; padding-left: 10px; padding-right: 4px; }
+  #divetable th.starth { padding-left: 10px; padding-right: 4px; }
+  #divetable .snork { color: var(--seaglass); }
+
+  /* island locator maps */
+  .islemap { display: block; margin: 2px auto 10px; max-width: 100%; cursor: zoom-in; }
+  .ovmap { display: block; margin: 22px auto 0; width: 100%; max-width: 720px; }
+  .ovmap g[data-sec] { cursor: pointer; }
+  .ovmap g[data-sec]:hover .isl { fill: var(--brass-dim); stroke: var(--brass-dim); }
+  .ovmap g[data-sec]:hover .lbl { fill: var(--brass); opacity: 1; }
+  .ovmap .hit { fill: transparent; stroke: none; }
+  .ovmap .lbl.faint { opacity: 0.35; }
+  .ovmap .poi { pointer-events: none; }
+  .ovmap .poisym { font-size: 9px; fill: var(--moon); }
+  .ovmap .poilbl { font-size: 7px; fill: var(--moon); opacity: 0.75; letter-spacing: 0.06em; }
+  section { scroll-margin-top: 64px; }
+  .islemap:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+  #mapoverlay {
+    position: fixed; inset: 0; z-index: 60;
+    display: none; align-items: center; justify-content: center; flex-direction: column; gap: 10px;
+    background: rgba(13,27,38,0.9);
+    -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);
+    cursor: zoom-out; padding: 24px;
+  }
+  #mapoverlay.open { display: flex; }
+  #mapoverlay svg.islemap { width: min(92vw, 700px); height: auto; cursor: zoom-out; margin: 0; }
+  #mapoverlay .cap { font-size: 13.5px; color: var(--cream-dim); text-align: center; max-width: 36em; }
+  .islemap .isl, .ovmap .isl { fill: #1d3644; stroke: #2a4152; stroke-width: 0.8; }
+  .islemap .usvi, .ovmap .usvi { fill: #16303f; stroke: none; opacity: 0.5; }
+  .islemap .isl.on, .ovmap .isl.on { fill: var(--brass); stroke: var(--brass); }
+  .islemap .lbl, .ovmap .lbl { font-size: 9px; fill: var(--cream-dim); opacity: 0.55; letter-spacing: 0.08em; }
+  .islemap .compass, .ovmap .compass { font-size: 9px; fill: var(--cream-dim); opacity: 0.5; }
+  .islemap .mark, .ovmap .mark { fill: none; stroke: var(--moon); stroke-width: 1.2; }
+
+  /* toast */
+  #toast {
+    position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(8px);
+    background: var(--panel); color: var(--cream);
+    border: 1px solid var(--brass-dim); border-radius: 6px;
+    padding: 10px 18px; font-size: 13.5px; max-width: min(88vw, 34em);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+    opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s;
+    z-index: 50; text-align: center;
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* photo placeholder for spots with no free-license image */
+  .spot a.ph {
+    aspect-ratio: 3 / 2;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    background: radial-gradient(120% 120% at 50% 0%, #16303f 0%, var(--panel-2) 75%);
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .spot a.ph svg { opacity: 0.45; transition: opacity 0.15s; }
+  .spot a.ph:hover svg { opacity: 0.8; }
+  .spot a.ph .phtext { font-size: 12.5px; color: var(--cream-dim); }
+  .spot a.ph .phtext em { color: var(--seaglass); font-style: normal; text-decoration: underline; }
+
   /* ---------- footer ---------- */
   .sendnote {
     margin: 40px auto 0;
@@ -129,6 +250,7 @@
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="isl-tortola"><path d="M129.0,186.5 126.7,182.2 126.4,177.8 123.3,176.6 117.9,178.3 117.4,180.1 113.2,182.4 110.9,181.0 110.4,183.7 109.0,184.4 105.1,183.3 102.9,181.0 102.9,179.2 101.2,182.1 98.1,182.8 96.7,182.0 93.9,182.6 92.7,181.2 91.0,182.3 87.9,181.9 81.6,180.0 80.9,183.0 76.7,182.6 79.5,183.8 79.2,187.6 73.2,185.3 73.4,187.5 71.0,188.9 70.9,191.2 72.3,193.5 74.4,193.5 74.3,196.2 67.3,200.0 66.9,204.8 64.0,208.7 59.5,211.1 52.7,209.9 51.4,213.1 49.0,212.8 48.4,213.9 43.2,215.6 49.1,216.8 52.2,216.2 52.6,217.5 63.1,214.9 67.2,219.2 71.2,218.7 71.9,217.1 76.9,214.8 77.2,213.4 82.9,213.6 86.4,208.7 86.1,210.8 86.9,211.0 85.7,211.4 86.9,211.4 87.6,210.2 86.3,205.7 86.8,204.1 88.2,204.3 88.1,206.3 95.7,206.5 96.8,203.8 98.8,202.2 97.6,202.0 97.0,203.0 95.0,199.5 97.6,197.0 94.7,196.3 95.3,194.6 96.9,194.1 96.8,195.8 97.9,195.6 98.6,193.8 100.5,196.3 102.5,196.4 103.3,199.4 104.8,199.9 105.4,199.1 106.6,201.6 109.2,203.1 111.2,202.5 112.2,200.5 114.0,202.6 114.5,201.6 116.1,202.0 119.0,199.1 116.5,201.0 115.0,200.1 115.6,199.1 116.8,199.5 117.2,197.1 119.6,197.9 119.2,198.9 120.3,198.7 121.0,195.7 121.8,195.0 122.2,196.1 123.6,194.4 123.3,192.3 121.8,192.6 121.2,191.6 121.8,189.1 125.6,187.6 127.4,188.4 125.5,189.7 127.1,189.4Z"/><path d="M128.1,196.8 124.6,193.7 125.7,196.8Z"/><circle cx="95.4" cy="195.5" r="1.6"/><circle cx="84.8" cy="211.7" r="1.6"/><circle cx="116.7" cy="199.8" r="1.6"/><circle cx="87.9" cy="205.2" r="1.6"/></g><g id="isl-usvi"><path d="M72.9,240.8 70.5,239.6 68.4,240.1 68.6,237.9 65.9,237.0 65.2,238.6 63.4,238.5 62.6,235.9 59.0,234.7 58.9,232.4 57.0,230.9 49.7,231.4 46.2,227.7 41.7,227.4 41.4,230.3 38.1,229.2 35.1,229.9 31.6,228.7 34.6,227.6 33.8,225.6 26.2,224.6 24.9,225.9 25.6,227.1 29.4,228.6 28.4,233.7 25.2,232.8 21.5,235.7 17.6,233.8 14.8,236.4 11.7,235.4 12.0,238.4 10.6,239.4 7.7,237.8 8.0,235.3 6.9,235.6 5.7,239.8 6.8,241.5 0.6,244.5 3.5,246.9 0.5,247.8 0.1,250.1 3.6,249.6 2.0,250.5 2.8,253.6 6.2,251.9 7.0,253.4 4.2,254.9 4.5,256.8 6.6,256.6 8.2,254.9 8.0,257.3 9.7,258.9 10.7,258.2 10.4,255.8 13.2,255.5 14.1,253.3 16.7,254.0 17.6,255.9 16.8,258.1 17.9,258.9 18.3,252.1 19.8,253.3 19.8,255.3 21.4,255.8 27.5,251.2 35.4,257.0 36.0,254.7 37.4,255.5 37.6,254.0 38.9,253.7 38.8,256.2 40.7,254.2 41.8,255.0 40.4,258.2 40.9,260.6 43.0,258.1 44.5,260.3 45.8,259.8 45.9,261.4 49.3,259.6 48.7,261.4 50.6,262.7 50.7,265.7 52.3,263.0 51.0,258.5 52.6,257.9 51.1,255.0 53.7,252.7 52.1,251.5 52.3,248.1 50.1,248.3 48.2,245.4 46.1,245.1 44.0,239.6 46.9,238.9 47.9,242.1 49.6,242.4 51.3,239.9 49.6,238.6 50.3,234.9 52.6,234.1 52.7,236.7 57.0,233.7 55.6,235.9 57.5,236.7 55.9,238.1 58.4,237.1 57.2,239.8 55.6,240.2 56.8,241.3 56.1,242.8 59.4,239.0 61.1,238.8 61.6,239.9 62.6,239.0 62.7,240.4 65.8,241.7 65.7,244.6 63.6,247.0 67.2,248.3 68.6,247.7 70.0,244.1 72.3,245.9 71.2,243.0 72.9,242.6Z"/><path d="M1.2,229.6 -1.0,228.7 -7.0,230.8 -5.0,232.5 -3.4,231.2 -0.8,231.5Z"/><path d="M1.2,226.7 -4.3,227.8Z"/></g><g id="isl-anegada"><path d="M277.0,47.1 275.8,41.6 264.2,27.3 261.3,26.4 258.7,22.7 256.3,22.7 254.4,20.3 248.7,18.2 242.8,16.8 236.9,21.3 230.3,19.3 225.2,20.7 220.2,17.9 215.0,17.0 211.3,19.3 208.4,18.9 206.3,19.9 203.0,18.6 200.6,21.3 207.8,28.4 209.5,31.7 214.8,29.1 218.1,30.2 219.1,32.0 219.7,30.9 223.6,30.1 225.4,30.4 226.5,32.0 230.2,31.8 236.2,34.6 250.8,35.1 254.7,37.6 254.3,36.3 255.3,36.5 255.6,39.0 260.6,40.6 265.5,44.4 267.9,45.0 273.8,50.4 276.5,49.3Z"/></g><g id="isl-vg"><path d="M251.1,152.5 247.3,152.6 246.1,154.1 242.5,153.0 240.4,153.6 235.5,157.0 234.8,156.3 236.5,154.3 236.3,153.0 232.1,153.3 230.9,156.9 232.9,158.9 228.1,158.5 225.4,160.2 222.5,159.5 218.4,160.7 219.5,156.2 218.0,155.9 217.8,154.9 214.1,156.0 212.3,153.0 210.8,152.8 210.6,151.3 208.3,152.7 200.9,152.2 201.2,153.6 203.9,155.0 201.5,160.1 202.1,163.8 200.9,165.4 202.6,167.6 201.3,169.9 201.9,171.2 198.3,174.4 196.6,174.6 194.8,173.0 192.9,176.4 191.3,176.8 190.6,175.3 189.0,175.3 186.4,177.4 189.6,179.8 189.6,182.2 190.5,181.6 186.5,185.8 185.7,190.9 186.3,191.8 184.8,194.8 186.2,195.7 188.0,195.3 190.3,192.7 194.6,193.4 197.0,192.2 193.9,187.4 195.6,177.4 202.2,174.4 204.8,171.8 216.0,172.3 215.9,169.5 214.7,169.8 214.2,168.3 216.4,162.6 219.9,163.1 222.0,165.1 225.1,162.4 227.5,163.5 232.0,162.2 232.3,160.0 235.6,157.8 238.3,157.2 240.4,158.5 244.7,156.4 247.0,156.6 247.5,154.6Z"/><path d="M214.6,146.2 212.5,146.1 211.7,147.8 209.2,148.2 209.6,149.6 210.9,150.5 213.3,149.7Z"/><circle cx="191.0" cy="150.5" r="1.6"/><circle cx="192.3" cy="150.6" r="1.6"/><circle cx="190.4" cy="150.6" r="1.6"/><circle cx="190.4" cy="150.5" r="1.6"/></g><g id="isl-jvd"><path d="M41.5,186.8 40.9,185.1 39.2,185.3 37.5,183.8 39.0,182.8 37.5,179.7 24.0,177.3 21.8,178.5 22.0,180.2 20.0,182.1 15.8,182.7 15.5,184.7 11.9,184.2 9.7,185.4 12.6,187.5 20.7,186.1 23.2,188.8 24.3,188.3 24.7,184.8 25.9,184.7 27.6,187.6 33.3,190.3 36.5,189.2 35.2,187.0 37.6,187.0 40.5,189.3Z"/><circle cx="39.4" cy="182.8" r="1.6"/></g><g id="isl-peter"><path d="M123.4,247.9 122.3,245.9 121.7,232.7 119.8,234.7 118.0,232.0 116.7,232.2 117.5,233.2 116.5,233.5 115.4,231.3 113.1,229.9 113.9,232.1 115.8,233.1 115.1,234.3 110.5,234.9 108.7,232.7 103.9,233.4 105.2,234.7 103.7,235.6 98.3,235.8 102.4,238.7 102.5,237.3 103.6,236.9 106.7,238.3 107.2,239.7 109.7,236.5 116.5,236.1 118.3,237.7 118.1,240.0 120.0,243.3 118.6,245.6 119.0,247.2Z"/><circle cx="106.9" cy="240.2" r="1.6"/></g><g id="isl-beef"><path d="M149.1,190.4 147.9,186.4 142.6,182.1 141.7,182.1 141.8,184.0 139.8,185.1 138.2,184.0 138.5,182.2 132.8,184.3 131.2,183.4 131.3,181.2 128.7,181.8 128.7,183.7 129.7,183.8 129.0,185.2 132.8,186.6 133.7,188.1 135.2,188.5 136.2,186.4 137.2,187.2 136.0,187.2 136.8,188.1 139.6,187.0 142.3,188.4 144.2,190.8 144.9,194.5Z"/><circle cx="139.8" cy="183.0" r="1.6"/><circle cx="132.2" cy="186.8" r="1.6"/></g><g id="isl-camanoe"><path d="M143.5,161.6 142.1,161.9 140.3,159.8 141.3,156.8 137.8,158.4 136.5,158.0 138.1,161.9 136.5,165.6 139.1,167.7 137.3,169.7 139.5,170.5 138.0,173.6 136.1,173.6 137.1,178.3 139.5,177.3 139.6,175.3 141.9,175.3 143.2,173.0 142.4,171.1 140.5,170.1Z"/><path d="M135.6,177.5 134.4,175.3 133.1,176.4 134.7,178.9 135.5,179.2Z"/></g><g id="isl-guana"><path d="M126.7,169.1 125.5,165.5 124.3,166.7 122.0,164.1 120.0,166.0 118.5,165.3 115.5,159.7 113.0,161.8 115.5,162.1 116.3,164.9 113.6,168.1 114.7,169.0 116.6,167.8 117.9,168.9 120.5,173.6 119.9,174.7 122.2,174.0 123.5,170.8Z"/></g><g id="isl-norman"><path d="M109.7,253.8 109.5,252.2 108.2,251.8 105.3,252.5 101.9,251.1 101.6,253.4 99.6,253.3 98.8,252.1 96.9,253.3 93.1,251.5 94.3,252.3 94.2,253.8 97.7,255.0 94.8,257.6 92.0,255.3 92.2,258.6 90.3,259.5 93.6,261.4 93.9,259.8 96.2,260.7 97.0,258.9 99.0,260.1 100.1,259.3 98.5,257.2 100.6,255.0 101.8,255.7 104.3,253.4 105.9,254.0 105.4,255.2 107.6,254.4 109.2,255.7Z"/><circle cx="91.3" cy="246.9" r="1.6"/><circle cx="89.9" cy="259.8" r="1.6"/><circle cx="89.5" cy="247.3" r="1.6"/><circle cx="89.4" cy="246.9" r="1.6"/></g><g id="isl-cooper"><path d="M158.1,225.9 156.7,223.8 154.6,224.3 152.4,223.0 152.6,220.2 154.5,218.8 150.9,217.1 151.0,215.8 149.7,215.2 150.2,218.1 148.9,220.5 152.1,223.1 152.7,227.0 153.9,225.9 156.9,228.3Z"/></g><g id="isl-other"><path d="M40.1,215.6 38.5,214.3 30.8,215.7 24.8,218.9 30.7,218.8 32.7,219.9 33.8,219.3 32.8,218.4 33.5,217.2Z"/><path d="M46.5,180.1 41.8,178.3 41.9,176.8 38.5,178.5 39.1,180.9 42.5,181.5Z"/><path d="M56.2,218.1 53.7,217.1 48.3,219.3 52.4,220.3Z"/><path d="M46.3,220.0 45.7,218.8 41.4,219.8Z"/><path d="M183.6,198.6 181.8,198.3 181.4,201.8Z"/><path d="M79.2,249.4 77.8,249.4 78.2,251.4Z"/></g><g id="isl-ginger"><path d="M173.3,214.4 172.5,213.3 168.2,213.7 162.4,217.0 166.8,216.2 167.9,218.6 171.0,219.4 172.0,218.3 169.3,216.9 170.1,216.2 169.3,215.4 172.3,215.9Z"/></g><g id="isl-scrub"><path d="M156.7,171.2 156.2,170.0 154.8,171.0 150.1,170.1 147.6,172.4 144.8,170.3 143.8,172.0 144.8,173.6 146.6,172.6 152.8,173.3Z"/></g><g id="isl-salt"><path d="M146.3,223.0 142.6,222.6 140.8,224.7 139.1,224.4 139.1,227.0 142.2,226.1 143.9,229.6 144.9,229.7 145.2,227.7 144.0,227.6 143.7,225.7Z"/></g><g id="isl-pricklypear"><path d="M230.6,151.7 226.8,150.3 225.5,147.2 222.3,147.1 225.2,150.7 225.7,153.0Z"/><path d="M232.6,148.2 231.2,147.9 229.9,149.3 231.1,149.7Z"/><circle cx="231.3" cy="152.6" r="1.6"/></g><g id="isl-dogs"><path d="M182.8,164.3 178.0,162.6 176.5,165.7 178.5,164.8 182.3,165.2Z"/><path d="M181.0,157.9 179.1,157.1 177.4,157.9 179.2,159.9Z"/><path d="M173.0,164.0 170.9,162.4 170.3,164.0Z"/><circle cx="175.9" cy="157.4" r="1.6"/><circle cx="175.9" cy="156.9" r="1.6"/></g><g id="isl-necker"><path d="M233.7,138.9 230.6,138.0 229.7,140.8 231.1,141.5Z"/></g><g id="isl-deadchest"><path d="M125.3,229.0 123.6,227.5 122.7,228.5 122.9,229.9Z"/></g><g id="isl-sandycay"><path d="M48.6,189.9 46.4,189.4Z"/></g><g id="isl-marinacay"><circle cx="143.7" cy="175.9" r="1.6"/></g></defs></svg>
 
 <header class="hero">
   <img class="bg" src="img/northsound.jpg" alt="North Sound and the outer islands of Virgin Gorda seen from Gorda Peak">
@@ -140,25 +262,238 @@
   </div>
 </header>
 
-<p class="standfirst">The itinerary gets decided <strong>with Captain Adrian on Day&nbsp;1</strong>, around the weather and what the group wants — so nothing here is a schedule. It's a menu, organized by anchorage: pick an island and there's usually a day's worth to do around it. The tags say who you'll be sharing each spot with — <span style="color:var(--brass)">boaters only</span>, mostly boaters, or <span style="color:var(--alert)">the tourist crowds</span>. Read through, pick your <strong>must&nbsp;/ want&nbsp;/ skip</strong>, and bring it up with the group.</p>
+<p class="standfirst">The itinerary gets decided <strong>with Captain Adrian on Day&nbsp;1</strong>, around the weather and what the group wants — so nothing here is a schedule. It's a menu, organized by anchorage: pick an island and there's usually a day's worth to do around it. Each card's tags show how busy it runs — <span style="color:var(--alert)">tourist magnet</span>, medium crowds, or <span style="color:var(--brass)">less busy</span> — and which lists it's on. Read through, pick your <strong>must&nbsp;/ want&nbsp;/ skip</strong>, and bring it up with the group.</p>
 
-<section>
+<p class="ainote"><span class="spark">✦</span> This research was assisted by an AI and should be verified — but it gives our discussion a good launching-off point.</p>
+
+<nav class="viewbar" aria-label="Views">
+  <div class="wrap">
+    <span class="lbl">View</span>
+    <button class="viewchip" data-viewbtn="all" aria-pressed="true">By island</button>
+    <button class="viewchip" data-viewbtn="dive" aria-pressed="false">Dives</button>
+    <button class="viewchip" data-viewbtn="snorkel" aria-pressed="false">Snorkeling</button>
+    <button class="viewchip" data-viewbtn="toys" aria-pressed="false">Water toys</button>
+    <button class="viewchip" data-viewbtn="beach" aria-pressed="false">Beaches</button>
+    <button class="viewchip" data-viewbtn="bars" aria-pressed="false">Bars &amp; food</button>
+    <button class="viewchip" data-viewbtn="hike" aria-pressed="false">Hikes</button>
+    <button class="viewchip" data-viewbtn="event" aria-pressed="false">Events</button>
+    <button class="viewchip" data-viewbtn="sights" aria-pressed="false">Sights &amp; history</button>
+  </div>
+</nav>
+
+<div class="wrap" id="ovwrap"><svg class="ovmap" viewBox="0 0 340 281" role="img" aria-label="Overview map of the British Virgin Islands; click an island to jump to its section"><text class="compass" x="10" y="16">N ↑</text><use href="#isl-usvi" class="isl usvi"/><use href="#isl-other" class="isl"/><text class="lbl faint" x="2" y="262" text-anchor="start">St John · USVI</text><g data-sec="sec-norman"><use href="#isl-norman" class="isl"/><circle class="hit" cx="99" cy="255" r="14"/><text class="lbl" x="97" y="272" text-anchor="middle">Norman</text></g><g data-sec="sec-peter"><use href="#isl-peter" class="isl"/><use href="#isl-deadchest" class="isl"/><circle class="hit" cx="118" cy="237" r="14"/><text class="lbl" x="112" y="253" text-anchor="middle">Peter Island</text></g><g data-sec="sec-salt"><use href="#isl-salt" class="isl"/><use href="#isl-cooper" class="isl"/><use href="#isl-ginger" class="isl"/><circle class="hit" cx="157" cy="222" r="18"/><text class="lbl" x="170" y="244" text-anchor="middle">Salt · Cooper · Ginger</text></g><g data-sec="sec-dogs"><use href="#isl-dogs" class="isl"/><circle class="hit" cx="178" cy="164" r="13"/><text class="lbl" x="178" y="146" text-anchor="middle">The Dogs</text></g><g data-sec="sec-baths"><use href="#isl-vg" class="isl"/><circle class="hit" cx="188" cy="196" r="14"/><text class="lbl" x="194" y="208" text-anchor="middle">The Baths</text></g><g data-sec="sec-northsound"><use href="#isl-pricklypear" class="isl"/><use href="#isl-necker" class="isl"/><circle class="hit" cx="225" cy="149" r="16"/><text class="lbl" x="238" y="126" text-anchor="middle">North Sound</text></g><g data-sec="sec-anegada"><use href="#isl-anegada" class="isl"/><text class="lbl" x="246" y="47" text-anchor="middle">Anegada</text></g><g data-sec="sec-tortola"><use href="#isl-tortola" class="isl"/><use href="#isl-guana" class="isl"/><use href="#isl-camanoe" class="isl"/><use href="#isl-scrub" class="isl"/><use href="#isl-marinacay" class="isl"/><text class="lbl" x="72" y="201" text-anchor="middle">Tortola</text></g><g data-sec="sec-lucky"><use href="#isl-beef" class="isl"/><circle class="hit" cx="139" cy="188" r="12"/><text class="lbl" x="131" y="203" text-anchor="middle">Trellis Bay</text></g><g data-sec="sec-jvd"><use href="#isl-jvd" class="isl"/><use href="#isl-sandycay" class="isl"/><circle class="hit" cx="37" cy="185" r="15"/><text class="lbl" x="3" y="164" text-anchor="start">Jost Van Dyke</text></g><g class="poi"><text x="134" y="181" text-anchor="middle" class="poisym">✈︎</text></g><g class="poi"><text x="84" y="215" text-anchor="middle" class="poisym">⛵︎</text></g></svg><p class="sectionnote" style="margin:6px auto 0">Click an island to jump to its section. See the BVI on <a href="https://www.google.com/maps/place/British+Virgin+Islands/@18.5,-64.47,11z">Google Maps</a> | <a href="https://maps.apple.com/?ll=18.5,-64.47&span=0.5,0.9&t=h">Apple Maps</a></p></div>
+
+<section id="diveview" class="viewhidden">
+  <div class="wrap">
+    <div class="rule"><h2>The Dive List</h2></div>
+    <p class="sectionnote">Every dive on the menu, in sail order — <strong style="color:var(--cream)">click a column to sort</strong>. <span style="color:var(--moon)">★</span> marks the headliners we recommend building days around. Depths are the max at the site; most have shallower sections. We carry our own PADI instructor and three free dives each for certified divers (no diving on the first or last day, per the contract) — final site calls happen aboard with Georgina, around the weather.</p>
+    <p style="text-align:center; margin: 0 0 14px;"><button id="staronly" class="viewchip" aria-pressed="false">Show ★ headliners only</button></p>
+    <div class="tablewrap">
+      <table id="divetable">
+        <thead>
+          <tr>
+            <th scope="col" class="starth" data-firstdesc="1" aria-label="Headliner"><span class="star">★</span></th>
+            <th scope="col">Site</th>
+            <th scope="col">Island</th>
+            <th scope="col">Type</th>
+            <th scope="col">Max depth</th>
+            <th scope="col">Level</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="starcell" data-val="1"><span class="star" title="Headliner — recommended">★</span></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/santa-monica-rock/">Santa Monica Rock</a></td>
+            <td data-val="1">South of Norman</td>
+            <td>Seamount · pelagics</td>
+            <td class="num" data-val="102">102 ft</td>
+            <td data-val="3"><span class="lv3">Advanced · calm day</span></td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="0"></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/the-indians/">The Indians</a></td>
+            <td data-val="1">Norman Island</td>
+            <td>Pinnacles · swim-through tunnel</td>
+            <td class="num" data-val="50">50 ft</td>
+            <td data-val="1">Easy</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="0"></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/angelfish-reef/">Angelfish Reef</a></td>
+            <td data-val="1">Norman Island</td>
+            <td>Reef · canyons &amp; sand channels</td>
+            <td class="num" data-val="80">80 ft</td>
+            <td data-val="1">Easy</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="0"></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/spyglass-wall/">Spyglass Wall</a></td>
+            <td data-val="1">Norman Island</td>
+            <td>Wall · sea fans, tarpon</td>
+            <td class="num" data-val="60">60 ft</td>
+            <td data-val="1">Easy</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="1"><span class="star" title="Headliner — recommended">★</span></td>
+            <td class="site"><a href="https://1beyondthereef.com/willy-t-wreck-1">The Original Willy T</a></td>
+            <td data-val="2">Peter Island</td>
+            <td>Wreck · pirate playground</td>
+            <td class="num" data-val="65">65 ft</td>
+            <td data-val="1">Easy</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="0"></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/carrot-shoal/">Carrot Shoal</a></td>
+            <td data-val="2">South of Peter</td>
+            <td>Pinnacles · orange sponges</td>
+            <td class="num" data-val="60">60 ft</td>
+            <td data-val="2">Intermediate · calm day</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="1"><span class="star" title="Headliner — recommended">★</span></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/painted-walls/">Painted Walls</a></td>
+            <td data-val="3">Dead Chest</td>
+            <td>Canyons · sponges &amp; color</td>
+            <td class="num" data-val="50">50 ft</td>
+            <td data-val="1">Easy</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="1"><span class="star" title="Headliner — recommended">★</span></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/blonde-rock/">Blonde Rock</a></td>
+            <td data-val="4">Dead Chest–Salt</td>
+            <td>Pinnacle · fire coral crown</td>
+            <td class="num" data-val="60">60 ft</td>
+            <td data-val="2">Intermediate · calm day</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="1"><span class="star" title="Headliner — recommended">★</span></td>
+            <td class="site"><a href="https://en.wikipedia.org/wiki/RMS_Rhone">RMS Rhone</a></td>
+            <td data-val="5">Salt Island</td>
+            <td>Wreck · 1867 steamer</td>
+            <td class="num" data-val="85">85 ft</td>
+            <td data-val="1">Easy · <span class="snork">stern snorkelable</span></td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="1"><span class="star" title="Headliner — recommended">★</span></td>
+            <td class="site"><a href="https://bviwreckweek.com/tours/wreck-alley/">Wreck Alley</a></td>
+            <td data-val="6">Cooper Island</td>
+            <td>Wrecks · 4 ships, 1 tank</td>
+            <td class="num" data-val="85">85 ft</td>
+            <td data-val="2">Intermediate</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="0"></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/dry-rocks-east/">Dry Rocks East</a></td>
+            <td data-val="6">Cooper Island</td>
+            <td>Seamount · big-fish magnet</td>
+            <td class="num" data-val="80">80 ft</td>
+            <td data-val="2.5">Int–Adv · calm day</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="1"><span class="star" title="Headliner — recommended">★</span></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/alices-wonderland/">Alice's Wonderland</a></td>
+            <td data-val="7">Ginger Island</td>
+            <td>Reef · mushroom coral heads</td>
+            <td class="num" data-val="70">70 ft</td>
+            <td data-val="1">Easy</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="0"></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/ginger-steps/">Ginger Steps</a></td>
+            <td data-val="7">Ginger Island</td>
+            <td>Wall · steps at 40 / 65 / 95</td>
+            <td class="num" data-val="95">95 ft</td>
+            <td data-val="2">Intermediate</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="1"><span class="star" title="Headliner — recommended">★</span></td>
+            <td class="site"><a href="https://yachtwarriors.com/destinations/british-virgin-islands/islands/the-dogs">The Chimney &amp; Bronco Billy</a></td>
+            <td data-val="8">The Dogs</td>
+            <td>Reef · swim-throughs</td>
+            <td class="num" data-val="45">45 ft</td>
+            <td data-val="1">Easy</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="1"><span class="star" title="Headliner — recommended">★</span></td>
+            <td class="site"><a href="https://1beyondthereef.com/sharkplaneos">Coral Gardens &amp; Sharkplaneos</a></td>
+            <td data-val="8">The Dogs</td>
+            <td>Art reef · sunken planes</td>
+            <td class="num" data-val="50">50 ft</td>
+            <td data-val="1">Easy · <span class="snork">snorkel-viewable</span></td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="0"></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/joes-cave/">Joe's Cave</a></td>
+            <td data-val="8">West Dog</td>
+            <td>Cavern · glassy sweepers</td>
+            <td class="num" data-val="45">45 ft</td>
+            <td data-val="1">Easy</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="0"></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/flintstones/">Flintstones</a></td>
+            <td data-val="8">West Dog</td>
+            <td>Boulders · ledges &amp; eels</td>
+            <td class="num" data-val="70">70 ft</td>
+            <td data-val="2">Intermediate</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="1"><span class="star" title="Headliner — recommended">★</span></td>
+            <td class="site"><a href="https://divebvi.com/the-kodiak-queen/">Kodiak Queen</a></td>
+            <td data-val="9">Virgin Gorda</td>
+            <td>Wreck · kraken art reef</td>
+            <td class="num" data-val="60">60 ft</td>
+            <td data-val="2">Intermediate</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="0"></td>
+            <td class="site"><a href="https://divebvi.com/dive-sites/">Mountain Point</a></td>
+            <td data-val="9">Virgin Gorda</td>
+            <td>Caves · grottos in the lee</td>
+            <td class="num" data-val="70">70 ft</td>
+            <td data-val="1">Easy</td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="0"></td>
+            <td class="site"><a href="https://bvi-dive-map.com/site/the-invisibles/">The Invisibles</a></td>
+            <td data-val="10">East of Necker</td>
+            <td>Seamount · fish funnel</td>
+            <td class="num" data-val="60">60 ft</td>
+            <td data-val="3"><span class="lv3">Advanced · calm day</span></td>
+          </tr>
+          <tr>
+            <td class="starcell" data-val="0"></td>
+            <td class="site"><a href="https://www.bvidiving.com/diving-twin-towers-little-jost-van-dyke.html">Twin Towers</a></td>
+            <td data-val="11">Little Jost Van Dyke</td>
+            <td>Pinnacles · two 90-ft towers</td>
+            <td class="num" data-val="90">90 ft</td>
+            <td data-val="3"><span class="lv3">Advanced</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="sec-lucky">
   <div class="wrap">
     <div class="rule"><h2>A Lucky Coincidence</h2></div>
+    
+    
     <div class="grid">
-      <article class="spot">
+      <article class="spot" data-cats="bars event">
         <img src="img/fireballs.jpg" alt="Aragorn's fire sculptures burning in the water at night during the Trellis Bay full moon party, crowd on the beach behind">
         <div class="body">
-          <div class="tags"><span class="tag moon">Full moon · Tue Apr 20</span><span class="tag busy">Everybody comes</span><span class="tag">Dinghy ride</span></div>
+          <div class="tags"><span class="tag busy">Tourist magnet</span><span class="tag">Bars &amp; food</span><span class="tag">Events</span></div>
           <h3>Trellis Bay Full Moon Party</h3>
-          <p>The full moon lands on <strong>Tuesday, April 20 — right in the middle of our week</strong>. Trellis Bay on Beef Island throws the BVI's most famous full-moon bash: Aragorn's giant steel fireball sculptures burning out in the water, Moko Jumbie stilt dancers, live calypso, and barbecue along the beach. The sculptures burn in the water right off the anchorage — so we can dinghy in for the music and barbecue, then watch the fires from our own deck with a nightcap. No taxis, no cover, thirty-second ride home.</p>
+          <p>The full moon lands on <strong>Tuesday, April 20 — right in the middle of our week</strong>. Trellis Bay on Beef Island throws the BVI's most famous full-moon bash: Aragorn's giant steel fireball sculptures burning out in the water, Moko Jumbie stilt dancers, live calypso, and barbecue along the beach. The sculptures burn in the water right off the anchorage — so we can dinghy in for the music and barbecue, then watch the fires from our own deck with a nightcap. No taxis, no cover, thirty-second ride home. Aragorn's own <strong>studio is right on the beach</strong> (open late on party night) — copper sculptures, pottery, and local crafts; the one real souvenir stop of the trip.</p>
           <p class="more"><a href="https://www.bvisail.com/full-moon-party-bvi/">About the party →</a></p>
         </div>
       </article>
-      <article class="spot">
+      <article class="spot" data-cats="bars event">
         <img src="img/foxys.jpg" alt="A fire dancer performing on the sand at Foxy's under a full moon, crowd gathered beneath the flag-hung rafters">
         <div class="body">
-          <div class="tags"><span class="tag moon">Full moon · Tue Apr 20</span><span class="tag">Mostly boaters</span><span class="tag">Bonfire</span></div>
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Bars &amp; food</span><span class="tag">Events</span></div>
           <h3>Foxy's Full Moon Party</h3>
           <p>Same night, opposite flavor: Foxy's at Great Harbour on Jost Van Dyke throws its own full-moon party — bonfires on the sand, live acoustic sets, and a barefoot crowd that's more conversation than spectacle. If the group wants the moon without the scene, we anchor here instead. Either way we only get the one night — Tuesday the 20th — so this is a group vote.</p>
           <p class="more"><a href="https://foxysbar.com/">foxysbar.com →</a></p>
@@ -168,207 +503,525 @@
   </div>
 </section>
 
-<section class="isle">
+<section class="isle" id="sec-norman">
   <div class="wrap">
-    <div class="rule isle"><h2>Norman Island — The Bight</h2></div>
-    <p class="sectionnote">The classic first-night anchorage, a short sail from Nanny Cay — snorkeling, a floating bar, and real trails all in one stop.</p>
+    <div class="rule isle"><h2>Norman Island</h2></div>
+    <svg class="islemap" width="250" viewBox="0 0 340 281" role="img" aria-label="Map: Norman Island highlighted"><text class="compass" x="10" y="16">N ↑</text><use href="#isl-tortola" class="isl"/><use href="#isl-usvi" class="isl usvi"/><use href="#isl-anegada" class="isl"/><use href="#isl-vg" class="isl"/><use href="#isl-jvd" class="isl"/><use href="#isl-peter" class="isl"/><use href="#isl-beef" class="isl"/><use href="#isl-camanoe" class="isl"/><use href="#isl-guana" class="isl"/><use href="#isl-norman" class="isl on"/><use href="#isl-cooper" class="isl"/><use href="#isl-other" class="isl"/><use href="#isl-ginger" class="isl"/><use href="#isl-scrub" class="isl"/><use href="#isl-salt" class="isl"/><use href="#isl-pricklypear" class="isl"/><use href="#isl-dogs" class="isl"/><use href="#isl-necker" class="isl"/><use href="#isl-deadchest" class="isl"/><use href="#isl-sandycay" class="isl"/><use href="#isl-marinacay" class="isl"/><text class="lbl" x="97" y="272" text-anchor="middle">Norman Island</text></svg>
+    
+    <p class="sectionnote">The island behind <em>Treasure Island</em>, a short sail from Nanny Cay — snorkeling, a floating bar, real trails, and a ring of dive sites. The main anchorage is The Bight.</p>
     <div class="grid">
-      <article class="spot">
+      <article class="spot" data-cats="snorkel">
         <img src="img/caves.jpg" alt="Looking out from inside a Norman Island cave, a snorkeler in the water and a sailboat moored beyond">
         <div class="body">
-          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Snorkel</span></div>
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Snorkeling</span></div>
           <h3>The Caves &amp; The Indians</h3>
-          <p>The island behind <em>Treasure Island</em>. Snorkel straight into the bat caves at Treasure Point, then dinghy out to <strong>The Indians</strong> — four coral pinnacles rising from the channel, some of the best snorkeling in the BVI. Both are moorings-only stops minutes from the anchorage.</p>
+          <p>Snorkel straight into the bat caves at Treasure Point, then dinghy out to <strong>The Indians</strong> — four coral pinnacles rising from the channel, some of the best snorkeling in the BVI. Both are moorings-only stops minutes from the anchorage — and both get mobbed by day boats from mid-morning, so go early.</p>
           <p class="more"><a href="https://en.wikipedia.org/wiki/Norman_Island">Norman Island on Wikipedia →</a></p>
         </div>
       </article>
-      <article class="spot">
+      <article class="spot" data-cats="bars">
         <img src="img/willyt.jpg" alt="The Willy T floating bar ringed by dinghies, crowd on the top deck and a jumper mid-air off the side">
         <div class="body">
-          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Floating bar</span></div>
+          <div class="tags"><span class="tag busy">Tourist magnet</span><span class="tag">Bars &amp; food</span></div>
           <h3>The Willy T</h3>
           <p>The infamous <strong>floating bar</strong> anchored in the Bight — a converted ship you can only reach by dinghy. Jump off the top deck, earn the sticker, dinghy home. The hurricane-sunk original Willy T now lies off Peter Island as a dive site, which says something about the establishment.</p>
           <p class="more"><a href="https://www.willy-t.com/">willy-t.com →</a></p>
         </div>
       </article>
-      <article class="spot">
+      <article class="spot" data-cats="hike">
         <img src="img/spyglass.jpg" alt="Looking down from the Norman Island trail onto the Bight anchorage, the Willy T among the moored boats">
         <div class="body">
-          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Hike</span></div>
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Hikes</span></div>
           <h3>Spyglass Hill &amp; the Trails</h3>
           <p>Norman is private but keeps its <strong>~8 miles of trails</strong> open to visitors. From the Bight, the short option climbs to Spyglass Hill — the pirates' actual lookout over the whole Drake Channel — and the long option crosses the island to Money Bay. One for the hikers while the rest hold down the Willy T.</p>
           <p class="more"><a href="https://www.mytravelingtastes.com/post/hiking-on-norman-island-british-virgin-islands">Trail write-up →</a></p>
         </div>
       </article>
+      <article class="spot" data-cats="dive">
+        <img src="img/santamonica.jpg" alt="A spotted eagle ray gliding low over coral heads at Santa Monica Rock">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Dives</span></div>
+          <h3>Santa Monica Rock</h3>
+          <p>A seamount a mile and a half south of Norman's tip — <strong>the outermost dive site in the BVI</strong>, named for the schooner that tore open on it. The pinnacle tops out within 20 ft of the surface but the site drops past 100, and being the frontier site makes it the best pelagic roll of the dice: amberjack, horse-eye jacks, eagle rays, nurse sharks, and a strange 25-ft sinkhole in the crown. <strong>Probably too advanced for our crew — unless Georgina says otherwise.</strong></p>
+          <p class="more"><a href="https://bvi-dive-map.com/site/santa-monica-rock/">Dive site guide →</a></p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="isle">
+<section class="isle" id="sec-peter">
   <div class="wrap">
-    <div class="rule isle"><h2>Salt &amp; Cooper Islands</h2></div>
-    <p class="sectionnote">Two quiet neighbors on the south side of the Drake Channel — the BVI's best wreck and its best last-night anchorage.</p>
+    <div class="rule isle"><h2>Peter Island &amp; Dead Chest</h2></div>
+    <svg class="islemap" width="250" viewBox="0 0 340 281" role="img" aria-label="Map: Peter Island and Dead Chest highlighted"><text class="compass" x="10" y="16">N ↑</text><use href="#isl-tortola" class="isl"/><use href="#isl-usvi" class="isl usvi"/><use href="#isl-anegada" class="isl"/><use href="#isl-vg" class="isl"/><use href="#isl-jvd" class="isl"/><use href="#isl-peter" class="isl on"/><use href="#isl-beef" class="isl"/><use href="#isl-camanoe" class="isl"/><use href="#isl-guana" class="isl"/><use href="#isl-norman" class="isl"/><use href="#isl-cooper" class="isl"/><use href="#isl-other" class="isl"/><use href="#isl-ginger" class="isl"/><use href="#isl-scrub" class="isl"/><use href="#isl-salt" class="isl"/><use href="#isl-pricklypear" class="isl"/><use href="#isl-dogs" class="isl"/><use href="#isl-necker" class="isl"/><use href="#isl-deadchest" class="isl on"/><use href="#isl-sandycay" class="isl"/><use href="#isl-marinacay" class="isl"/><text class="lbl" x="112" y="253" text-anchor="middle">Peter Island</text></svg>
+    
+    <p class="sectionnote">One island east of Norman: a resort island, the pirate-legend islet of the actual dead man's chest, and three of the BVI's best dives within a mile of each other.</p>
     <div class="grid">
-      <article class="spot">
+      <article class="spot" data-cats="dive">
+        <img src="img/willytwreck.jpg" alt="Looking up the sunken Willy T's mast and crow's nest through blue water, fish schooling around the rigging mesh">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Dives</span></div>
+          <h3>The Original Willy T, Sunk</h3>
+          <p>The hurricane-wrecked original Willy T barge was scuttled off Peter Island's Key Bay in 2019 as a <strong>pirate-themed underwater playground</strong> — costumed pirate figures on deck, crow's nest at 35 ft, hull at 65. Dive the original in the afternoon, drink at its replacement that evening; the $5 site donation funds swim lessons for BVI kids.</p>
+          <p class="more"><a href="https://1beyondthereef.com/willy-t-wreck-1">Beyond the Reef →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="dive">
+        <img src="img/paintedwalls.jpg" alt="A whitespotted filefish gliding past sponges and soft corals at Painted Walls, Dead Chest">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Dives</span></div>
+          <h3>Painted Walls</h3>
+          <p>Four narrow canyons off Dead Chest — the actual dead man's chest of the pirate song — with walls crusted floor-to-surface in <strong>sponges and corals in every color</strong>. Nurse sharks and hawksbills nap in the passageways, and at 20–50 ft the bottom time runs long and the colors stay lit.</p>
+          <p class="more"><a href="https://bvi-dive-map.com/site/painted-walls/">Dive site guide →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="dive">
+        <img src="img/blonderock.jpg" alt="A Caribbean reef squid hanging in open blue water at Blonde Rock">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Dives</span></div>
+          <h3>Blonde Rock</h3>
+          <p>Twin pinnacles in open water between Dead Chest and Salt, rising from 60 ft to 15 below the surface under a <strong>blonde crown of fire coral</strong>. A fish magnet — schooling jacks, barracuda, turtles, the odd reef shark — and a ship-killer since the age of sail: the Royal Navy published "marks to find the Blonde Rock" back in 1824. Minutes from Painted Walls.</p>
+          <p class="more"><a href="https://bvi-dive-map.com/site/blonde-rock/">Dive site guide →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="toys beach">
+        <img src="img/deadmans.jpg" alt="The palm-lined crescent of Deadman's Bay on Peter Island, calm turquoise water along the sand">
+        <div class="body">
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Water toys</span><span class="tag">Beaches</span></div>
+          <h3>Deadman's Bay</h3>
+          <p>One of the Caribbean's classic palm crescents, fronting the Peter Island Resort that <strong>reopened in December 2024 after a seven-year, $100M rebuild</strong>. Calm, protected water for the toys, bookable moorings, day access to the beach — and the BVI's first true steakhouse — with the Willy T wreck and Painted Walls minutes away by dinghy.</p>
+          <p class="more"><a href="https://vitalcharters.com/blog/peter-island-bvi/">Peter Island guide →</a></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="isle" id="sec-salt">
+  <div class="wrap">
+    <div class="rule isle"><h2>Salt, Cooper &amp; Ginger Islands</h2></div>
+    <svg class="islemap" width="250" viewBox="0 0 340 281" role="img" aria-label="Map: Salt, Cooper and Ginger Islands highlighted"><text class="compass" x="10" y="16">N ↑</text><use href="#isl-tortola" class="isl"/><use href="#isl-usvi" class="isl usvi"/><use href="#isl-anegada" class="isl"/><use href="#isl-vg" class="isl"/><use href="#isl-jvd" class="isl"/><use href="#isl-peter" class="isl"/><use href="#isl-beef" class="isl"/><use href="#isl-camanoe" class="isl"/><use href="#isl-guana" class="isl"/><use href="#isl-norman" class="isl"/><use href="#isl-cooper" class="isl on"/><use href="#isl-other" class="isl"/><use href="#isl-ginger" class="isl on"/><use href="#isl-scrub" class="isl"/><use href="#isl-salt" class="isl on"/><use href="#isl-pricklypear" class="isl"/><use href="#isl-dogs" class="isl"/><use href="#isl-necker" class="isl"/><use href="#isl-deadchest" class="isl"/><use href="#isl-sandycay" class="isl"/><use href="#isl-marinacay" class="isl"/><text class="lbl" x="162" y="243" text-anchor="middle">Salt · Cooper · Ginger</text></svg>
+    
+    <p class="sectionnote">Three quiet neighbors on the south side of the Drake Channel — the BVI's best wrecks, one of its best anchorages, and its healthiest reef.</p>
+    <div class="grid">
+      <article class="spot" data-cats="dive snorkel sights">
         <img src="img/rhone.jpg" alt="Coral-encrusted wreckage of the RMS Rhone underwater">
         <div class="body">
-          <div class="tags"><span class="tag">Boaters &amp; dive boats</span><span class="tag">Snorkelable</span><span class="tag">Scuba</span></div>
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Dives</span><span class="tag">Snorkeling</span><span class="tag">Sights &amp; history</span></div>
           <h3>Wreck of the RMS Rhone</h3>
-          <p>An 1867 royal mail steamer off Salt Island — the Caribbean's most celebrated wreck dive, and we're carrying our own PADI instructor and <strong>three free dives each for certified divers</strong>. The shallow stern section works for snorkelers too. Ashore, a short walk passes the old salt ponds to the graves of the Rhone's sailors. Note: no diving on the first or last day, per the contract.</p>
+          <p>An 1867 royal mail steamer off Salt Island — the Caribbean's most celebrated wreck dive, and we're carrying our own PADI instructor and <strong>three free dives each for certified divers</strong>. The shallow stern section works for snorkelers too.</p>
           <p class="more"><a href="https://en.wikipedia.org/wiki/RMS_Rhone">The Rhone on Wikipedia →</a></p>
         </div>
       </article>
-      <article class="spot">
+      <article class="spot" data-cats="sights hike">
+        <img src="img/saltisland.jpg" alt="Crusted white salt in the foreground of Salt Island's pond, an old wooden raking boat sitting in the shallows">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Hikes</span><span class="tag">Sights &amp; history</span></div>
+          <h3>Salt Island Ashore</h3>
+          <p>The island the Rhone sank beside is a sight of its own: an <strong>abandoned salt-raking settlement</strong> whose ponds are still harvested on occasional salt days, and whose rent was traditionally <strong>a one-pound bag of salt a year to the British Crown</strong>. A short walk from the beach passes the empty houses and ponds to the communal grave of the Rhone's sailors — a quiet, oddly moving fifteen minutes between snorkels.</p>
+          <p class="more"><a href="https://www.islandrootscharters.com/charter-blog/salt-island-bvi-a-complete-guide">Salt Island guide →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="bars toys snorkel">
         <img src="img/cooper.jpg" alt="Catamarans moored off the palm-lined beach at Manchioneel Bay, Cooper Island">
         <div class="body">
-          <div class="tags"><span class="tag">Mostly boaters</span><span class="tag">Turtles</span><span class="tag">Rum</span></div>
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Snorkeling</span><span class="tag">Water toys</span><span class="tag">Bars &amp; food</span></div>
           <h3>Cooper Island Beach Club</h3>
-          <p>A solar-powered eco-resort on Manchioneel Bay you can only reach by boat. <strong>Sea turtles graze under the moorings</strong> — kayak or SUP over them in the morning calm — the microbrewery makes its own beer, and the rum bar stocks one of the Caribbean's largest collections, 280-odd bottles. The obvious venue for Eric's cigars, and a favorite last-night stop before the sail home.</p>
+          <p>A solar-powered eco-resort on Manchioneel Bay you can only reach by boat. <strong>Sea turtles graze under the moorings</strong> — kayak or SUP over them in the morning calm — the microbrewery makes its own beer, and the rum bar stocks the Caribbean's largest collection — 400-odd rums. The mooring field fills by mid-afternoon, so arrive by 2 — conveniently, happy hour starts at 3. The obvious venue for Eric's cigars.</p>
           <p class="more"><a href="https://cooperislandbeachclub.com/">cooperislandbeachclub.com →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="dive">
+        <img src="img/wreckalley.jpg" alt="The coral-dusted hull of the tug Beata rising from the sand at Wreck Alley, Cooper Island">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Dives</span></div>
+          <h3>Wreck Alley</h3>
+          <p>Four ships scuttled off Cooper's southeast bluff, close enough to <strong>swim hull-to-hull on a single tank</strong> — the cargo boat Marie L, tugs Pat and Beata, and the Island Seal, sitting upright on sand at up to 85 ft. A huge garden-eel colony carpets the sand between them, with stingrays and eagle rays cruising through.</p>
+          <p class="more"><a href="https://bviwreckweek.com/tours/wreck-alley/">Wreck Alley guide →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="snorkel">
+        <img src="img/cistern.jpg" alt="A snorkeler finning over boulders and coral at Cistern Point, Cooper Island">
+        <div class="body">
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Snorkeling</span></div>
+          <h3>Cistern Point</h3>
+          <p>The rocky point <strong>two minutes' dinghy (or SUP) from the Beach Club moorings</strong> — a swim-around-the-whole-rock snorkel with serious fish volume. Nurse sharks and barracuda hold in the deeper overhangs, spiny lobster pack the crevices.</p>
+          <p class="more"><a href="https://yachtwarriors.com/destinations/british-virgin-islands/islands/cistern-point-cooper-island">Snorkel guide →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="dive">
+        <img src="img/alice.jpg" alt="Rounded pillar-coral heads at Alice's Wonderland, a dusky damselfish hovering between them">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Dives</span></div>
+          <h3>Alice's Wonderland</h3>
+          <p>Ginger Island's spur-and-groove reef, named for its <strong>giant mushroom-shaped coral heads</strong> straight out of Carroll. Visibility often tops 100 ft over some of the healthiest coral in the territory — eagle rays, hawksbills, huge puffers — and the easy 35–70 ft profile means every certified diver aboard can do it.</p>
+          <p class="more"><a href="https://bvi-dive-map.com/site/alices-wonderland/">Dive site guide →</a></p>
         </div>
       </article>
     </div>
   </div>
 </section>
 
-<section class="isle">
+<section class="isle" id="sec-dogs">
   <div class="wrap">
     <div class="rule isle"><h2>The Dogs</h2></div>
-    <p class="sectionnote">Uninhabited islets halfway to Virgin Gorda — no bars, no beaches worth the name, just some of the BVI's best reefs. A natural lunch stop on a Baths or North Sound day.</p>
+    <svg class="islemap" width="250" viewBox="0 0 340 281" role="img" aria-label="Map: The Dogs highlighted"><text class="compass" x="10" y="16">N ↑</text><use href="#isl-tortola" class="isl"/><use href="#isl-usvi" class="isl usvi"/><use href="#isl-anegada" class="isl"/><use href="#isl-vg" class="isl"/><use href="#isl-jvd" class="isl"/><use href="#isl-peter" class="isl"/><use href="#isl-beef" class="isl"/><use href="#isl-camanoe" class="isl"/><use href="#isl-guana" class="isl"/><use href="#isl-norman" class="isl"/><use href="#isl-cooper" class="isl"/><use href="#isl-other" class="isl"/><use href="#isl-ginger" class="isl"/><use href="#isl-scrub" class="isl"/><use href="#isl-salt" class="isl"/><use href="#isl-pricklypear" class="isl"/><use href="#isl-dogs" class="isl on"/><use href="#isl-necker" class="isl"/><use href="#isl-deadchest" class="isl"/><use href="#isl-sandycay" class="isl"/><use href="#isl-marinacay" class="isl"/><text class="lbl" x="178" y="147" text-anchor="middle">The Dogs</text></svg>
+    
+    <p class="sectionnote">Uninhabited islets halfway to Virgin Gorda — no bars, no beaches worth the name, just some of the BVI's best reefs.</p>
     <div class="grid">
-      <article class="spot">
+      <article class="spot" data-cats="dive snorkel">
         <img src="img/dogs.jpg" alt="Aerial view of West Dog, Great Dog, and George Dog with the anchorage marked off George Dog">
         <div class="body">
-          <div class="tags"><span class="tag">Boaters &amp; dive boats</span><span class="tag">Scuba</span><span class="tag">Snorkel</span></div>
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Dives</span><span class="tag">Snorkeling</span></div>
           <h3>Diving The Dogs</h3>
           <p>Three headline sites: <strong>The Chimney</strong> on Great Dog, a swim-up rock shaft ending in a fish-bowl cauldron of reef fish; <strong>Bronco Billy</strong> off George Dog, reputedly a Jacques Cousteau favorite; and <strong>Coral Gardens</strong>, where three small airplanes were sunk in 2019 as an artificial reef and are already coral-crusted. Day moorings only, calm-morning territory — another one to plan with Georgina, and good snorkeling for the non-divers when it's flat.</p>
           <p class="more"><a href="https://yachtwarriors.com/destinations/british-virgin-islands/islands/the-dogs">Dive guide →</a></p>
         </div>
       </article>
+      <article class="spot" data-cats="dive snorkel">
+        <img src="img/sharkplaneos.jpg" alt="A diver standing on the sand beside a Sharkplaneo — an airplane fuselage with a toothy shark grin painted on the nose">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Dives</span><span class="tag">Snorkeling</span></div>
+          <h3>The Sharkplaneos</h3>
+          <p>Beside Coral Gardens: <strong>three retired island-hopper airplanes reborn as shark sculptures</strong> — a bull, a hammerhead, and a nurse shark with fabricated fins and teeth — sunk in 2019 in 30–50 ft of gin-clear water, next to a coral archway woven from recycled mooring line. Novice depth, so fresh certs can dive it and snorkelers can watch from the surface on a flat day.</p>
+          <p class="more"><a href="https://1beyondthereef.com/sharkplaneos">Beyond the Reef →</a></p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="isle">
+<section class="isle" id="sec-baths">
   <div class="wrap">
-    <div class="rule isle"><h2>Virgin Gorda — The Baths</h2></div>
-    <p class="sectionnote">The southern tip of Virgin Gorda, where the granite starts.</p>
+    <div class="rule isle"><h2>Virgin Gorda — The Baths &amp; Spanish Town</h2></div>
+    <svg class="islemap" width="250" viewBox="0 0 340 281" role="img" aria-label="Map: Virgin Gorda highlighted, marker at The Baths on the southern tip"><text class="compass" x="10" y="16">N ↑</text><use href="#isl-tortola" class="isl"/><use href="#isl-usvi" class="isl usvi"/><use href="#isl-anegada" class="isl"/><use href="#isl-vg" class="isl on"/><use href="#isl-jvd" class="isl"/><use href="#isl-peter" class="isl"/><use href="#isl-beef" class="isl"/><use href="#isl-camanoe" class="isl"/><use href="#isl-guana" class="isl"/><use href="#isl-norman" class="isl"/><use href="#isl-cooper" class="isl"/><use href="#isl-other" class="isl"/><use href="#isl-ginger" class="isl"/><use href="#isl-scrub" class="isl"/><use href="#isl-salt" class="isl"/><use href="#isl-pricklypear" class="isl"/><use href="#isl-dogs" class="isl"/><use href="#isl-necker" class="isl"/><use href="#isl-deadchest" class="isl"/><use href="#isl-sandycay" class="isl"/><use href="#isl-marinacay" class="isl"/><text class="lbl" x="246" y="196" text-anchor="middle">Virgin Gorda</text><circle class="mark" cx="186" cy="191" r="4"/></svg>
+    
+    <p class="sectionnote">The southern tip of Virgin Gorda, where the granite starts — plus the town behind it and the empty mile of sand just north.</p>
     <div class="grid">
-      <article class="spot">
+      <article class="spot" data-cats="snorkel hike beach sights">
         <img src="img/baths.jpg" alt="Inside a grotto at The Baths — turquoise water threading between giant granite boulders onto pale sand">
         <div class="body">
-          <div class="tags"><span class="tag busy">Tourist magnet</span><span class="tag">Go at 8 AM</span><span class="tag">Swim in</span></div>
+          <div class="tags"><span class="tag busy">Tourist magnet</span><span class="tag">Snorkeling</span><span class="tag">Beaches</span><span class="tag">Hikes</span><span class="tag">Sights &amp; history</span></div>
           <h3>The Baths</h3>
           <p>Giant granite boulders, grottos, and tidal pools — the single most famous sight in the BVI, mobbed by land tours from mid-morning. Being on a boat gives us an option nobody ashore has: moor off at 8 AM and <strong>swim into the grottos before the first taxi arrives</strong>, then take the boulder-scramble trail through to Devil's Bay. Nearby Fallen Jerusalem has the same boulders and nobody on them.</p>
           <p class="more"><a href="https://en.wikipedia.org/wiki/The_Baths">The Baths on Wikipedia →</a></p>
         </div>
       </article>
+      <article class="spot" data-cats="beach snorkel">
+        <img src="img/springbay.jpg" alt="Spring Bay's boulder-framed beach — granite domes behind white sand and turquoise surf">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Snorkeling</span><span class="tag">Beaches</span></div>
+          <h3>Spring Bay &amp; The Crawl</h3>
+          <p>The Baths' boulders, one cove north, at a fraction of the crowd — NPT moorings offshore and sea-grape shade on the sand. <strong>The Crawl</strong> is a natural boulder-ringed swimming pool, calm and glassy even when it's rolly outside. The move: do the Baths at 8 AM, and when the taxis arrive, slide one cove over.</p>
+          <p class="more"><a href="https://www.bareboatsbvi.com/virgin-gorda/spring-bay-national-park.php">About Spring Bay →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="toys snorkel beach">
+        <img src="img/savannah.jpg" alt="The empty reef-protected curve of Savannah Bay, Virgin Gorda — white sand and glassy turquoise shallows">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Snorkeling</span><span class="tag">Water toys</span><span class="tag">Beaches</span></div>
+          <h3>Savannah Bay</h3>
+          <p>A mile of usually-deserted white sand behind a barrier reef just north of Spanish Town — <strong>glassy, shallow water made for the e-foil, sea scooters, and SUPs</strong>, plus a government-installed self-guided snorkel trail with underwater marker signs on the reef. A natural day stop between the Baths and North Sound (skip it in a rare north swell).</p>
+          <p class="more"><a href="https://bvivoyager.com/savannah-bay/">About Savannah Bay →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="bars">
+        <img src="img/cocomaya.jpg" alt="CocoMaya's beachfront dining pergola at sunset — a set table on a wooden deck in the sand, granite boulders in the water beyond">
+        <div class="body">
+          <div class="tags"><span class="tag busy">Tourist magnet</span><span class="tag">Bars &amp; food</span></div>
+          <h3>CocoMaya</h3>
+          <p>Latin-Asian sharing plates served <strong>toes-in-sand between Baths-style granite boulders</strong>, swing chairs at the bar, the whole room aimed at the sunset. By common consensus one of the best tables in the BVI — and one of the hardest; it books out well ahead. Runs its own full-moon parties, too. <strong>If we trade one dinner aboard for one fine meal ashore, this could be it</strong> — worth deciding early so the crew can book it.</p>
+          <p class="more"><a href="https://www.clubbvi.com/restaurant-cocomaya">cocomaya →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="hike sights">
+        <img src="img/coppermine.jpg" alt="The ruined stone chimney and engine house of the Virgin Gorda copper mine on its wave-battered headland">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Hikes</span><span class="tag">Sights &amp; history</span></div>
+          <h3>Copper Mine Point</h3>
+          <p>Cornish miners raised the chimney and engine house on this headland in the 1830s and pulled <strong>10,000 tons of copper</strong> out before abandoning it to the waves. The ruins now stand alone against the Atlantic — a free, 15-minute stop with a huge photo payoff that stacks onto any Baths / Spanish Town run.</p>
+          <p class="more"><a href="https://en.wikipedia.org/wiki/Copper_Mine,_Virgin_Gorda">Copper Mine on Wikipedia →</a></p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="isle">
+<section class="isle" id="sec-northsound">
   <div class="wrap">
     <div class="rule isle"><h2>Virgin Gorda — North Sound</h2></div>
+    <svg class="islemap" width="250" viewBox="0 0 340 281" role="img" aria-label="Map: Virgin Gorda highlighted, marker at North Sound"><text class="compass" x="10" y="16">N ↑</text><use href="#isl-tortola" class="isl"/><use href="#isl-usvi" class="isl usvi"/><use href="#isl-anegada" class="isl"/><use href="#isl-vg" class="isl on"/><use href="#isl-jvd" class="isl"/><use href="#isl-peter" class="isl"/><use href="#isl-beef" class="isl"/><use href="#isl-camanoe" class="isl"/><use href="#isl-guana" class="isl"/><use href="#isl-norman" class="isl"/><use href="#isl-cooper" class="isl"/><use href="#isl-other" class="isl"/><use href="#isl-ginger" class="isl"/><use href="#isl-scrub" class="isl"/><use href="#isl-salt" class="isl"/><use href="#isl-pricklypear" class="isl on"/><use href="#isl-dogs" class="isl"/><use href="#isl-necker" class="isl"/><use href="#isl-deadchest" class="isl"/><use href="#isl-sandycay" class="isl"/><use href="#isl-marinacay" class="isl"/><text class="lbl" x="246" y="196" text-anchor="middle">Virgin Gorda</text><circle class="mark" cx="225" cy="152" r="4"/></svg>
+    
     <p class="sectionnote">A huge reef-ringed lagoon at the island's north end — the BVI's flat-water playground and a natural overnight base.</p>
     <div class="grid">
-      <article class="spot">
+      <article class="spot" data-cats="bars event">
         <img src="img/sabarock.jpg" alt="Saba Rock resort and bar on its tiny island in North Sound">
         <div class="body">
-          <div class="tags"><span class="tag">Mostly boaters</span><span class="tag">Evening anchorage</span><span class="tag">Sunset bar</span></div>
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Bars &amp; food</span><span class="tag">Events</span></div>
           <h3>Saba Rock</h3>
-          <p>A bar-restaurant on its own one-acre rock in the middle of the sound — dinghy dock, tarpon feeding at dusk, rebuilt beautifully after Irma — with the Bitter End Yacht Club across the water and Leverick Bay around the corner.</p>
+          <p>A bar-restaurant on its own one-acre rock in the middle of the sound — dinghy dock, a <strong>daily 5 PM tarpon-feeding frenzy</strong> off the dock (be tied up by 4:55), rebuilt beautifully after Irma — with the Bitter End Yacht Club across the water and Leverick Bay around the corner.</p>
           <p class="more"><a href="https://sabarock.com/">sabarock.com →</a></p>
         </div>
       </article>
-      <article class="spot">
+      <article class="spot" data-cats="toys">
         <img src="img/flatwater.jpg" alt="Aerial of a catamaran's stern with kayaks, paddleboards and floats spread out on flat turquoise water">
         <div class="body">
-          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Toys out</span></div>
-          <h3>The Flat Water</h3>
-          <p>This is where <em>Do More</em>'s garage earns its keep: protected, glassy morning water for the <strong>e-foil, sea scooters, SUPs, and kayaks</strong>, with adjacent Eustatia Sound serving as the local kite-and-foil playground. Anchor here a full evening-to-morning and everyone gets a turn on everything.</p>
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Water toys</span></div>
+          <h3>Flat Water for the Toys</h3>
+          <p>This is where we play with <em>Do More</em>'s garage: protected, glassy morning water for the <strong>e-foil, sea scooters, SUPs, and kayaks</strong>. Next door, Eustatia Sound is the BVI's kiteboarding mecca — we don't carry kites, but outfits in North Sound do lessons and rentals if anyone's keen. Anchor here a full evening-to-morning and everyone gets a turn on everything.</p>
           <p class="more"><a href="https://www.beyc.com/">Bitter End Yacht Club →</a></p>
         </div>
       </article>
-      <article class="spot">
+      <article class="spot" data-cats="hike">
         <img src="img/gordapeak.jpg" alt="Looking down from Gorda Peak over Virgin Gorda's coast road, reef-fringed bays and the Drake Channel">
         <div class="body">
-          <div class="tags"><span class="tag">Hike</span><span class="tag">Taxi to trailhead</span></div>
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Hikes</span></div>
           <h3>Gorda Peak</h3>
           <p>Virgin Gorda's summit — about <strong>50 minutes up through dry forest to a 360° platform at 1,370 ft</strong>, looking down on the whole North Sound (the photo at the top of this page is that view). Short taxi to the trailhead from Leverick Bay. The best effort-to-view ratio in the islands; one for the hikers on a North Sound morning.</p>
           <p class="more"><a href="https://aerialbvi.com/blog/best-hiking-spots-bvi/">BVI hiking guide →</a></p>
         </div>
       </article>
+      <article class="spot" data-cats="dive sights">
+        <img src="img/kodiakqueen.jpg" alt="The 80-ft mesh kraken sculpture wrapped over the Kodiak Queen's superstructure, seen from above just before sinking">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Dives</span><span class="tag">Sights &amp; history</span></div>
+          <h3>Kodiak Queen &amp; the Kraken</h3>
+          <p>A WWII Navy fuel barge — <strong>one of only five vessels to survive Pearl Harbor</strong> — rescued from a Road Town junkyard and sunk off Virgin Gorda's Mountain Point in 2017 with an 80-ft mesh kraken wrapped around her (the Branson-backed BVI Art Reef project). Storm swell has knocked the kraken's head about, but the tentacles still grip the hull at ~55 ft, now thick with coral-restoration life.</p>
+          <p class="more"><a href="https://divebvi.com/the-kodiak-queen/">Dive BVI on the wreck →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="bars event">
+        <img src="img/leverick.jpg" alt="Leverick Bay's docks and candy-colored buildings seen from a gingerbread-trimmed balcony">
+        <div class="body">
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Bars &amp; food</span><span class="tag">Events</span></div>
+          <h3>Leverick Bay &amp; Michael Beans</h3>
+          <p>The Caribbean's self-styled last one-man band runs a gloriously silly pirate happy hour — <strong>conch-blowing contests, singalongs, prizes</strong> — Monday to Wednesday, 5–7 PM, at Leverick's beach bar. Claim a table by 4:30. Fridays add a beach BBQ with moko jumbie stilt walkers.</p>
+          <p class="more"><a href="https://leverickbay.com/dining/">leverickbay.com →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="bars">
+        <img src="img/hogheaven.jpg" alt="BBQ chicken, plantains, and a Carib on Hog Heaven's picnic table, all of North Sound spread out far below the deck rail">
+        <div class="body">
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Bars &amp; food</span></div>
+          <h3>Hog Heaven</h3>
+          <p>A local BBQ shack on the ridge above the sound with <strong>maybe the best restaurant view in the territory</strong> — all of North Sound, Necker, Prickly Pear, and Eustatia laid out below. Ribs, buttery conch, and plantains at local prices. Short taxi up from Leverick or Gun Creek.</p>
+          <p class="more"><a href="https://www.chiluxetravel.com/where-to-eat-on-virgin-gorda-hog-heaven-serves-up-the-best-bbq-and-views/">About Hog Heaven →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="bars">
+        <img src="img/nova.jpg" alt="Nova's open-air dining pavilion and daybeds on the dock at Oil Nut Bay's Marina Village, catamarans berthed alongside">
+        <div class="body">
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Bars &amp; food</span></div>
+          <h3>Nova at Oil Nut Bay</h3>
+          <p>The one glossy stop boat crews say is actually worth it: an <strong>overwater restaurant at Oil Nut Bay's Marina Village</strong> — suspended pool, overwater hammocks, currently the #1-rated table on Virgin Gorda. Reservations essential (they coordinate the dock when you book). <strong>If we trade one dinner aboard for one fine meal ashore, this could be it</strong> — worth deciding early so the crew can book it.</p>
+          <p class="more"><a href="https://www.oilnutbay.com/restaurant/nova/">oilnutbay.com →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="beach toys">
+        <img src="img/pricklypear.jpg" alt="Aerial over Necker Island toward Prickly Pear Island and Virgin Gorda, reef and turquoise channels between">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Water toys</span><span class="tag">Beaches</span></div>
+          <h3>Prickly Pear — Vixen Point</h3>
+          <p>The undeveloped national-park island that forms North Sound's northern wall. Vixen Point's soft white beach has <strong>calm, shallow water</strong> — a real beach afternoon without leaving the Sound, an easy dinghy from Leverick or Saba Rock. The Sand Box beach bar only opens sporadically these days; treat the beach as the destination and an open bar as a bonus.</p>
+          <p class="more"><a href="https://www.bareboatsbvi.com/other-islands/prickly-pear-island.php">About Prickly Pear →</a></p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="isle">
+<section class="isle" id="sec-anegada">
   <div class="wrap">
     <div class="rule isle"><h2>Anegada</h2></div>
-    <p class="sectionnote">The far-out one: ~2–3 hours of open-water sailing north from North Sound, and the reason our week logs ~115 miles instead of 75. Wants a calm forecast; worth the spend.</p>
+    <svg class="islemap" width="250" viewBox="0 0 340 281" role="img" aria-label="Map: Anegada highlighted, far north of the other islands"><text class="compass" x="10" y="16">N ↑</text><use href="#isl-tortola" class="isl"/><use href="#isl-usvi" class="isl usvi"/><use href="#isl-anegada" class="isl on"/><use href="#isl-vg" class="isl"/><use href="#isl-jvd" class="isl"/><use href="#isl-peter" class="isl"/><use href="#isl-beef" class="isl"/><use href="#isl-camanoe" class="isl"/><use href="#isl-guana" class="isl"/><use href="#isl-norman" class="isl"/><use href="#isl-cooper" class="isl"/><use href="#isl-other" class="isl"/><use href="#isl-ginger" class="isl"/><use href="#isl-scrub" class="isl"/><use href="#isl-salt" class="isl"/><use href="#isl-pricklypear" class="isl"/><use href="#isl-dogs" class="isl"/><use href="#isl-necker" class="isl"/><use href="#isl-deadchest" class="isl"/><use href="#isl-sandycay" class="isl"/><use href="#isl-marinacay" class="isl"/><text class="lbl" x="246" y="47" text-anchor="middle">Anegada</text></svg>
+    
+    <p class="sectionnote">The far-out one: ~2–3 hours of open-water sailing north from North Sound. If the weather is good it's worth the trip.</p>
     <div class="grid">
-      <article class="spot">
+      <article class="spot" data-cats="snorkel toys beach">
         <img src="img/flamingos.jpg" alt="A flock of flamingos wading through shallow water under a blue sky">
         <div class="body">
-          <div class="tags"><span class="tag">Mostly boaters</span><span class="tag">Full day</span><span class="tag">Snorkel</span></div>
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Snorkeling</span><span class="tag">Water toys</span><span class="tag">Beaches</span></div>
           <h3>The Island Itself</h3>
           <p>A low coral atoll most charters never reach — so flat you can't see it until you're nearly there. Miles of empty sand at Loblolly and Cow Wreck, flamingos in the salt ponds, snorkeling on Horseshoe Reef, and the flattest SUP water of the trip inside the anchorage.</p>
           <p class="more"><a href="https://en.wikipedia.org/wiki/Anegada">Anegada on Wikipedia →</a></p>
         </div>
       </article>
-      <article class="spot">
+      <article class="spot" data-cats="bars">
         <img src="img/lobstertrap.jpg" alt="The Lobster Trap's glowing lobster sign at dusk on the Anegada beach, boats moored offshore">
         <div class="body">
-          <div class="tags"><span class="tag">Boaters by dinnertime</span><span class="tag">Lobster</span><span class="tag">Beach bar</span></div>
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Bars &amp; food</span></div>
           <h3>Lobster on the Beach</h3>
-          <p>The island's famous move: radio ahead in the morning, and by sunset there's <strong>Anegada lobster on the grill</strong> at a beach shack like the Lobster Trap at Setting Point — toes in the sand, caught that day. The day-trip ferry leaves at 5 PM, so the dinner crowd is almost entirely people who sailed in. Widely rated the best meal of a BVI week.</p>
+          <p>The island's famous move: radio ahead in the morning, and by sunset there's <strong>Anegada lobster on the grill</strong> at a beach shack like the Lobster Trap at Setting Point — toes in the sand, caught that day. The day-trip ferry leaves at 5 PM, so the dinner crowd is almost entirely people who sailed in. Widely rated the best meal of a BVI week — and if the group wants it louder, the Wonky Dog two docks down adds live music and a serious cocktail list.</p>
           <p class="more"><a href="https://www.bvitourism.com/anegada">BVI Tourism: Anegada →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="snorkel beach">
+        <img src="img/flashofbeauty.jpg" alt="A lone wooden beach chair on empty white sand at Anegada's north shore, coral heads dark in the turquoise shallows">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Snorkeling</span><span class="tag">Beaches</span></div>
+          <h3>Flash of Beauty</h3>
+          <p>The best <strong>walk-in snorkeling on Anegada</strong> — a protected pocket of Horseshoe Reef with big coral heads right off the sand, ten minutes past Loblolly and far quieter. Monica's tiny beach bar behind it has a cult following for conch fritters and chicken roti.</p>
+          <p class="more"><a href="https://yachtwarriors.com/destinations/british-virgin-islands/islands/flash-of-beauty-anegada">Snorkel guide →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="bars beach sights">
+        <img src="img/cowwreck.jpg" alt="Conch shells and yellow chairs under the palms at Cow Wreck Beach Bar, turquoise water beyond">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Beaches</span><span class="tag">Bars &amp; food</span><span class="tag">Sights &amp; history</span></div>
+          <h3>Cow Wreck &amp; the North Shore Loop</h3>
+          <p>Rent a moke and loop the north shore: Cow Wreck's blinding beach and barefoot bar (named for a wrecked ship full of cow bones), the <strong>Flamingo Pond overlook — ~200 wild flamingos</strong> — and the pens in The Settlement where critically endangered Anegada rock iguanas are raised safe from cats before release. Loblolly and Big Bamboo round out the circuit.</p>
+          <p class="more"><a href="https://www.cowwreckbeachbvi.com/">cowwreckbeachbvi.com →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="sights">
+        <img src="img/faulkner.jpg" alt="The Faulkner House Museum — a white clapboard cottage with teal shutters, Faulkner's bust on a stone plinth out front">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Sights &amp; history</span></div>
+          <h3>Faulkner House Museum</h3>
+          <p>The clapboard home of <strong>Theodolph Faulkner — the Anegada fisherman who led 1,500 people on Road Town in 1949</strong> and won the BVI its own legislature — kept as a period museum in The Settlement (donation entry, roughly 10 AM–2 PM). It sits on the same taxi loop as the flamingos and iguanas — a 20-minute stop. Hours are loose — have the taxi driver confirm.</p>
+          <p class="more"><a href="https://www.bvitourism.com/faulkner-house-museum">BVI Tourism: Faulkner House →</a></p>
         </div>
       </article>
     </div>
   </div>
 </section>
 
-<section class="isle">
+<section class="isle" id="sec-tortola">
+  <div class="wrap">
+    <div class="rule isle"><h2>Tortola's North Side &amp; Its Islets</h2></div>
+    <svg class="islemap" width="250" viewBox="0 0 340 281" role="img" aria-label="Map: Tortola and its northern islets highlighted"><text class="compass" x="10" y="16">N ↑</text><use href="#isl-tortola" class="isl on"/><use href="#isl-usvi" class="isl usvi"/><use href="#isl-anegada" class="isl"/><use href="#isl-vg" class="isl"/><use href="#isl-jvd" class="isl"/><use href="#isl-peter" class="isl"/><use href="#isl-beef" class="isl"/><use href="#isl-camanoe" class="isl on"/><use href="#isl-guana" class="isl on"/><use href="#isl-norman" class="isl"/><use href="#isl-cooper" class="isl"/><use href="#isl-other" class="isl"/><use href="#isl-ginger" class="isl"/><use href="#isl-scrub" class="isl on"/><use href="#isl-salt" class="isl"/><use href="#isl-pricklypear" class="isl"/><use href="#isl-dogs" class="isl"/><use href="#isl-necker" class="isl"/><use href="#isl-deadchest" class="isl"/><use href="#isl-sandycay" class="isl"/><use href="#isl-marinacay" class="isl on"/><text class="lbl" x="89" y="218" text-anchor="middle">Tortola</text></svg>
+    
+    <p class="sectionnote">The home island's back side — most charters only see it on the sail between Trellis Bay and Jost. Worth slowing down for.</p>
+    <div class="grid">
+      <article class="spot" data-cats="snorkel">
+        <img src="img/guana.jpg" alt="Panorama of Guana Island's green ridgeline and anchorage from above, sails dotting the turquoise channel">
+        <div class="body">
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Snorkeling</span></div>
+          <h3>Monkey Point, Guana Island</h3>
+          <p>The BVI's famous <strong>swim-inside-a-bait-ball</strong> snorkel: seasonal clouds of millions of silversides pack the cove at Guana's southern tip, with tarpon and pelicans blitzing through — plus turtles and the odd dolphin. National Parks Trust day moorings only, so it stays pristine. Go in the morning for calm.</p>
+          <p class="more"><a href="https://celticboats.com/destination/guana-island/monkey-point/">Monkey Point guide →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="bars">
+        <img src="img/marinacay.jpg" alt="Marina Cay Bar & Grill glowing with string lights and lantern globes at dusk, a crowd under the rafters and the water behind">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Bars &amp; food</span></div>
+          <h3>Marina Cay</h3>
+          <p>Robb White's <em>Our Virgin Island</em> — an eight-acre, reef-ringed islet ten minutes from Trellis Bay, a Pusser's outpost for 25 years, <strong>reopened in 2023 as Marina Cay Bar &amp; Grill</strong> under Scrub Island's operator. Palapa bar, sunset painkillers, postcard anchorage. Open Wed–Sun.</p>
+          <p class="more"><a href="https://marina-cay.com/">marina-cay.com →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="beach hike">
+        <img src="img/longbaybeef.jpg" alt="The empty white crescent of Long Bay, Beef Island, green hills behind the turquoise shallows">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Beaches</span><span class="tag">Hikes</span></div>
+          <h3>Long Bay, Beef Island</h3>
+          <p>A <strong>30–40 minute coastal walk from the Trellis Bay anchorage</strong> ends at a long crescent of white sand facing Guana and the Camanoes — Beef Island's main swimming beach, usually near-empty. Carry water; there's nothing there but the beach.</p>
+          <p class="more"><a href="https://yachtwarriors.com/destinations/british-virgin-islands/islands/trellis-bay-beef-island">Trellis Bay guide →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="bars sights">
+        <img src="img/callwood.jpg" alt="Callwood's wood-fired copper pot still smoking over open flame, banana trees behind">
+        <div class="body">
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Bars &amp; food</span><span class="tag">Sights &amp; history</span></div>
+          <h3>Cane Garden Bay &amp; Callwood Rum</h3>
+          <p>Anchor off Tortola's postcard bay and walk to the <strong>oldest continuously operating rum distillery in the Eastern Caribbean</strong> — the Callwood family has run copper pot stills in the same 400-year-old stone building for three centuries; about $5 gets the tour and tastings. The old Quito's is back as Rhythm &amp; Sands, still with live music on the sand.</p>
+          <p class="more"><a href="https://callwoodcanerum.com/">callwoodcanerum.com →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="hike">
+        <img src="img/sageview.jpg" alt="Peter Island and the Drake Channel seen from high on Tortola near Sage Mountain">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Hikes</span></div>
+          <h3>Sage Mountain National Park</h3>
+          <p>The <strong>highest point in all the Virgin Islands (1,716 ft)</strong> hides a surprise pocket of elfin rainforest — mahogany, giant ferns, a dozen looped trails, about an hour for the main loop, $3 entry. The only shade-and-green hike of the trip, with Drake Channel views through the gaps. Muddy after rain.</p>
+          <p class="more"><a href="https://www.bvinationalparkstrust.org/">BVI National Parks Trust →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="sights">
+        <img src="img/fahie.jpg" alt="A Fahie Hill mural panel — musicians with banjo and guitar painted along the Ridge Road retaining wall">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Sights &amp; history</span></div>
+          <h3>Fahie Hill Murals</h3>
+          <p><strong>Twenty-three painted panels along a Ridge Road retaining wall</strong> — 1950s hillside life: cutting cane, terracing crops, baking cassava bread, ghost stories by lantern — led by artist Ruben Vanterpool with panels by musician Quito Rhymer and others. Free, always open. The taxi to Sage Mountain drives right past; ask the driver to pull over for ten minutes.</p>
+          <p class="more"><a href="https://vilifeandstyle.com/behind-the-ridge-road-mural-with-artist-ruben-vanterpool/">The story behind it →</a></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="isle" id="sec-jvd">
   <div class="wrap">
     <div class="rule isle"><h2>Jost Van Dyke &amp; Its Islets</h2></div>
+    <svg class="islemap" width="250" viewBox="0 0 340 281" role="img" aria-label="Map: Jost Van Dyke and its islets highlighted"><text class="compass" x="10" y="16">N ↑</text><use href="#isl-tortola" class="isl"/><use href="#isl-usvi" class="isl usvi"/><use href="#isl-anegada" class="isl"/><use href="#isl-vg" class="isl"/><use href="#isl-jvd" class="isl on"/><use href="#isl-peter" class="isl"/><use href="#isl-beef" class="isl"/><use href="#isl-camanoe" class="isl"/><use href="#isl-guana" class="isl"/><use href="#isl-norman" class="isl"/><use href="#isl-cooper" class="isl"/><use href="#isl-other" class="isl"/><use href="#isl-ginger" class="isl"/><use href="#isl-scrub" class="isl"/><use href="#isl-salt" class="isl"/><use href="#isl-pricklypear" class="isl"/><use href="#isl-dogs" class="isl"/><use href="#isl-necker" class="isl"/><use href="#isl-deadchest" class="isl"/><use href="#isl-sandycay" class="isl on"/><use href="#isl-marinacay" class="isl"/><text class="lbl" x="3" y="167" text-anchor="start">Jost Van Dyke</text></svg>
+    
     <p class="sectionnote">The barefoot island — beach bars in front, the Bubbly Pool around the back, and postcard islets off the east end.</p>
     <div class="grid">
-      <article class="spot">
-        <img src="img/whitebay.jpg" alt="Catamarans anchored in the turquoise water of White Bay, Jost Van Dyke">
+      <article class="spot" data-cats="bars beach">
+        <img src="img/whitebay.jpg" alt="Aerial of White Bay, Jost Van Dyke — boats moored inside the reef, the strip of bars and palms along the blinding sand">
         <div class="body">
-          <div class="tags"><span class="tag busy">Busy by noon</span><span class="tag">Beach day</span><span class="tag">Anchor &amp; swim</span></div>
+          <div class="tags"><span class="tag busy">Tourist magnet</span><span class="tag">Beaches</span><span class="tag">Bars &amp; food</span></div>
           <h3>White Bay</h3>
           <p>The BVI's most photographed beach — a strip of blinding sand behind a reef cut, lined with a dozen barefoot bars. Anchor inside the reef, swim ashore, wander bar to bar. Around the island's back side, the <strong>Bubbly Pool</strong> — a natural wave-fed jacuzzi in the rocks — makes a good walk from Foxy's Taboo.</p>
           <p class="more"><a href="https://www.bvitourism.com/jost-van-dyke">BVI Tourism: Jost Van Dyke →</a></p>
         </div>
       </article>
-      <article class="spot">
+      <article class="spot" data-cats="bars">
         <img src="img/soggy.jpg" alt="The Soggy Dollar Bar beach shack with rum barrels and teal chairs">
         <div class="body">
-          <div class="tags"><span class="tag busy">Tourist magnet</span><span class="tag">Painkiller № 1</span></div>
+          <div class="tags"><span class="tag busy">Tourist magnet</span><span class="tag">Bars &amp; food</span></div>
           <h3>Soggy Dollar Bar</h3>
-          <p>Birthplace of the <strong>Painkiller</strong> — rum, coconut, pineapple, orange, fresh nutmeg. Named for how you pay: there's no dock, so you swim in and hand over wet bills. On White Bay, so it pairs with the beach day. Obligatory.</p>
+          <p>Birthplace of the <strong>Painkiller</strong> — rum, coconut, pineapple, orange, fresh nutmeg. Named for how you pay: there's no dock, so you swim in and hand over wet bills. On White Bay. Obligatory.</p>
           <p class="more"><a href="https://www.soggydollar.com/">soggydollar.com →</a></p>
         </div>
       </article>
-      <article class="spot">
+      <article class="spot" data-cats="bars event">
+        <img src="img/foxysbar.jpg" alt="Looking out from under Foxy's rafters — decades of signed flags and pennants overhead, Great Harbour's turquoise anchorage beyond">
+        <div class="body">
+          <div class="tags"><span class="tag">Medium crowds</span><span class="tag">Bars &amp; food</span><span class="tag">Events</span></div>
+          <h3>Foxy's</h3>
+          <p><strong>Foxy Callwood has been improvising calypso at Great Harbour since 1968</strong>, under rafters hung with decades of ships' flags, t-shirts, and business cards. The <strong>all-you-can-eat BBQ with a live band runs every Friday and Saturday</strong>. Some days the man himself still sings.</p>
+          <p class="more"><a href="https://foxysbar.com/">foxysbar.com →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="snorkel hike beach">
         <img src="img/sandyspit.jpg" alt="Aerial view of Sandy Spit, a tiny sand islet ringed by reef">
         <div class="body">
-          <div class="tags"><span class="tag gold">Boaters only</span><span class="tag">Swim ashore</span></div>
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Snorkeling</span><span class="tag">Beaches</span><span class="tag">Hikes</span></div>
           <h3>Sandy Spit &amp; Sandy Cay</h3>
-          <p>The screensaver islets off the east end — a blob of white sand, a handful of palms, reef all around. No dock, no ferry, no bar: you anchor off and wade in. Bring the drone; this is what it's for.</p>
+          <p>The screensaver islets off the east end — blobs of white sand, a handful of palms, reef all around. No dock, no ferry, no bar: anchor off, wade in, and <strong>claim your own uninhabited island for an hour</strong>. Sandy Cay (Laurance Rockefeller's old island, now a national park) even has a ~20-minute loop trail over its little summit. Bring the drone — the whole-group photo alone on a speck of sand is the trip's Christmas card.</p>
           <p class="more"><a href="https://en.wikipedia.org/wiki/Sandy_Cay_(British_Virgin_Islands)">Sandy Cay on Wikipedia →</a></p>
         </div>
       </article>
-    </div>
-    <div class="sendnote">
-      Seen something that's a must? Something you'd skip?
-      <span class="small">Bring it up with the group — rankings get collected before the crew calls in April.</span>
+      <article class="spot" data-cats="bars beach">
+        <img src="img/jostaerial.jpg" alt="Aerial view of the anchorage between Jost Van Dyke and Little Jost Van Dyke, reef and sandbars in the channel">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Beaches</span><span class="tag">Bars &amp; food</span></div>
+          <h3>B-Line Beach Bar</h3>
+          <p>A driftwood-simple bar on its own spit of sand on Little Jost — <strong>the anti-Soggy-Dollar</strong>, and the one charter crowds keep calling the best real beach bar left in the BVI. Cold rum drinks, weekend ribs and fish tacos, cornhole and Shut the Box on an empty beach; WhatsApp them for a dinghy pickup.</p>
+          <p class="more"><a href="https://www.bvitraveller.com/b-line-beach-bar/">About B-Line →</a></p>
+        </div>
+      </article>
+      <article class="spot" data-cats="bars">
+        <img src="img/sidneys.jpg" alt="Sidney's Peace and Love — a yellow beach shack hung with t-shirts under the palms at Little Harbour, a blue dinghy floating in the shallows">
+        <div class="body">
+          <div class="tags"><span class="tag gold">Less busy</span><span class="tag">Bars &amp; food</span></div>
+          <h3>Sidney's Peace and Love</h3>
+          <p>Little Harbour's old charter-fleet institution: an <strong>honor bar where you walk behind the counter, pour your own, and write it down yourself</strong>, plus lobster and BBQ dinners in a harbour a world quieter than Great Harbour. Rebuilt after Irma (and a later fire), still run by Sidney's family. The mellow counterweight to a Foxy's evening.</p>
+          <p class="more"><a href="https://www.bvitraveller.com/sidneys-peace-and-love/">About Sidney's →</a></p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
+
+<div class="wrap">
+  <div class="sendnote">
+    Seen something that's a must? Something you'd skip?
+    <span class="small">Bring it up with the group — let's make sure we hit everyone's favorites and avoid the lame stuff.</span>
+  </div>
+</div>
 
 <footer>
   <div class="wrap">
@@ -378,18 +1031,146 @@
       <circle cx="36" cy="36" r="2.5" fill="#a99f8c"/>
     </svg>
     <div class="flag2"><em>Do More</em> · April 18–25, 2027 · British Virgin Islands</div>
-    <p class="credits">Photos via Wikimedia Commons &amp; Flickr:
+    <p class="credits">Island outlines: map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors (ODbL). Photos via Wikimedia Commons &amp; Flickr:
       <a href="https://commons.wikimedia.org/wiki/File:Virgin_Gorda_North_Sound_2010.jpg">North Sound</a> © Gruepig (CC BY-SA 4.0) ·
       <a href="https://www.flickr.com/photos/89333651@N00/13202719403">Cooper Island</a> © kmoliver on Flickr (CC BY-NC-ND 2.0) ·
       <a href="https://commons.wikimedia.org/wiki/File:RMS_Rhone_2003_12.jpg">RMS Rhone</a> © Gareth Richards (CC BY-SA 3.0) ·
       <a href="https://commons.wikimedia.org/wiki/File:Karibik_-_Brit._Jungferninseln_-_Sandy_Spit_-_panoramio.jpg">Sandy Spit</a> © giggel (CC BY 3.0) ·
-      <a href="https://commons.wikimedia.org/wiki/File:White_Bay_Jost_Van_Dyke.jpg">White Bay</a> © Cemerp (CC BY 3.0) ·
       <a href="https://commons.wikimedia.org/wiki/File:Soggy_Dollar_Bar_(49891810556).jpg">Soggy Dollar</a> © David Stanley (CC BY 2.0) ·
       <a href="https://commons.wikimedia.org/wiki/File:Saba_Rock.jpg">Saba Rock</a> © kansasphoto (CC BY 2.0) ·
       <a href="https://commons.wikimedia.org/wiki/File:VIEW_FROM_GORDA_PEAK,_BRITISH_VIRGIN_ISLANDS.jpg">Gorda Peak view</a> © Jerrye &amp; Roy Klotz MD (CC BY-SA 3.0) ·
+      <a href="https://www.flickr.com/photos/53035741@N06/51875370901">Painted Walls</a> &amp; <a href="https://www.flickr.com/photos/53035741@N06/52546933962">Blonde Rock</a> © Pauline Walsh Jacobson (CC BY-NC 2.0) ·
+      <a href="https://commons.wikimedia.org/wiki/File:Wreck_Alley_-_Beatta_-_small.JPG">Wreck Alley</a> &amp; <a href="https://commons.wikimedia.org/wiki/File:Peter_Island_01.jpg">Drake Channel view</a> © Legis (public domain) ·
+      <a href="https://www.flickr.com/photos/102952505@N05/10377938444">Deadman's Bay</a> © lbu04rpm (CC BY-NC-SA 2.0) ·
+      <a href="https://www.flickr.com/photos/39315083@N07/26320069523">Cistern Point</a> © Northwest in Motion (CC BY-NC-SA 2.0) ·
+      <a href="https://commons.wikimedia.org/wiki/File:Virgin_Gorda_Savannah_Bay_2010.jpg">Savannah Bay</a> © Gruepig (CC BY-SA 4.0) ·
+      <a href="https://commons.wikimedia.org/wiki/File:Copper_Mine,_Virgin_Gorda.jpg">Copper Mine</a> © Legis (public domain) ·
+      <a href="https://commons.wikimedia.org/wiki/File:LEVERICK_BAY,_VIRGIN_GORDA,_B.V.I..jpg">Leverick Bay</a> © Jerrye &amp; Roy Klotz MD (CC BY-SA 3.0) ·
+      <a href="https://commons.wikimedia.org/wiki/File:Anegada_-_Loblolly_and_Salt_Ponds_-_09.jpg">Anegada north shore</a> © ScubaBear68 (CC BY 2.0) ·
+      <a href="https://commons.wikimedia.org/wiki/File:Cow_Wreck_Beach,_British_Virgin_Islands_Nov_2019.jpg">Cow Wreck</a> © anoldent (CC BY-SA 2.0) ·
+      <a href="https://commons.wikimedia.org/wiki/File:Guana_Island_(15906918330).jpg">Guana Island</a> © Jean-Marc Astesana (CC BY-SA 2.0) ·
+      <a href="https://commons.wikimedia.org/wiki/File:Karibik_-_Brit._Jungferninseln_-_Jost_van_Dyke_%E2%80%93_and_Little_Jost_van_Dyke_-_panoramio.jpg">Jost aerial</a> &amp; <a href="https://commons.wikimedia.org/wiki/File:Necker_Island_%E2%80%93_Eustatia_Island_-_Prickly_Pear_Island_%E2%80%93_Virgin_Gorda_-_panoramio.jpg">North Sound aerial</a> © giggel (CC BY 3.0) ·
     </p>
   </div>
 </footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="mapoverlay" role="dialog" aria-modal="true" aria-label="Enlarged island map"><div class="cap"></div></div>
+
+<script>
+(function () {
+  var toastEl = document.getElementById('toast');
+  var toastTimer = null;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 4000);
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest ? e.target.closest('.tag') : null;
+    if (t) toast('An AI agent assigned these tags from web research — worth verifying before you count on them.');
+  });
+  var chips = Array.prototype.slice.call(document.querySelectorAll('[data-viewbtn]'));
+  var spots = Array.prototype.slice.call(document.querySelectorAll('.spot'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section'));
+  var diveView = document.getElementById('diveview');
+
+  function setView(view) {
+    var tableMode = view === 'dive';
+    chips.forEach(function (c) {
+      c.setAttribute('aria-pressed', String(c.getAttribute('data-viewbtn') === view));
+    });
+    diveView.classList.toggle('viewhidden', !tableMode);
+    var ov = document.getElementById('ovwrap');
+    if (ov) ov.classList.toggle('viewhidden', view !== 'all');
+    spots.forEach(function (s) {
+      var cats = (s.getAttribute('data-cats') || '').split(/\s+/);
+      var show = view === 'all' || cats.indexOf(view) !== -1;
+      s.classList.toggle('viewhidden', !show);
+    });
+    sections.forEach(function (sec) {
+      if (sec === diveView) return;
+      var any = sec.querySelector('.spot:not(.viewhidden)');
+      sec.classList.toggle('viewhidden', tableMode || !any);
+    });
+    if (view === 'all') {
+      if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    } else {
+      history.replaceState(null, '', '#' + view);
+    }
+  }
+
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () { setView(c.getAttribute('data-viewbtn')); });
+  });
+
+  var initial = location.hash.replace('#', '');
+  if (chips.some(function (c) { return c.getAttribute('data-viewbtn') === initial; })) setView(initial);
+
+  var table = document.getElementById('divetable');
+  var headers = Array.prototype.slice.call(table.querySelectorAll('th'));
+  headers.forEach(function (th, idx) {
+    th.addEventListener('click', function () {
+      var cur = th.getAttribute('aria-sort');
+      var dir = cur === 'ascending' ? -1 : cur === 'descending' ? 1 : (th.hasAttribute('data-firstdesc') ? -1 : 1);
+      headers.forEach(function (h) { h.removeAttribute('aria-sort'); });
+      th.setAttribute('aria-sort', dir === 1 ? 'ascending' : 'descending');
+      var body = table.tBodies[0];
+      var rows = Array.prototype.slice.call(body.rows);
+      rows.sort(function (a, b) {
+        var av = a.cells[idx].getAttribute('data-val') || a.cells[idx].textContent.trim().toLowerCase();
+        var bv = b.cells[idx].getAttribute('data-val') || b.cells[idx].textContent.trim().toLowerCase();
+        var an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return (an - bn) * dir;
+        return av < bv ? -dir : av > bv ? dir : 0;
+      });
+      rows.forEach(function (r) { body.appendChild(r); });
+    });
+  });
+
+  var overlay = document.getElementById('mapoverlay');
+  var overlayCap = overlay.querySelector('.cap');
+  function closeMap() {
+    overlay.classList.remove('open');
+    var old = overlay.querySelector('svg');
+    if (old) old.remove();
+  }
+  function openMap(m) {
+    closeMap();
+    var clone = m.cloneNode(true);
+    clone.removeAttribute('tabindex'); clone.removeAttribute('role');
+    overlay.insertBefore(clone, overlayCap);
+    overlayCap.textContent = (m.getAttribute('aria-label') || '').replace(/^Map: /, '') + ' — tap anywhere to close';
+    overlay.classList.add('open');
+  }
+  Array.prototype.slice.call(document.querySelectorAll('.islemap')).forEach(function (m) {
+    m.setAttribute('tabindex', '0');
+    m.addEventListener('click', function () { openMap(m); });
+    m.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openMap(m); }
+    });
+  });
+  Array.prototype.slice.call(document.querySelectorAll('.ovmap g[data-sec]')).forEach(function (g) {
+    g.addEventListener('click', function () {
+      var sec = document.getElementById(g.getAttribute('data-sec'));
+      if (sec) sec.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+  overlay.addEventListener('click', closeMap);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMap(); });
+
+  var starBtn = document.getElementById('staronly');
+  starBtn.addEventListener('click', function () {
+    var on = starBtn.getAttribute('aria-pressed') !== 'true';
+    starBtn.setAttribute('aria-pressed', String(on));
+    Array.prototype.slice.call(table.tBodies[0].rows).forEach(function (r) {
+      var starred = r.cells[0].getAttribute('data-val') === '1';
+      r.classList.toggle('viewhidden', on && !starred);
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
